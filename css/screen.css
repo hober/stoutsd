@@ -4,6 +4,9 @@ ul.noindent, ol.noindent {
   margin: 0 1.5em 1.5em 0;
 }
 
+#header {
+}
+
 /* Typography */
 body {
   font-family: "Times New Roman", Times, serif;
@@ -25,7 +28,7 @@ ul.nobullets, ol.nobullets {
 /* Color */
 
 body {
-  background-color: #000;
+  background: #0a0907 url(pint-gradient.png) repeat-x;
   color: #c7ab83;
 }
 
@@ -34,7 +37,6 @@ h2, h3 {
 }
 
 #header, h1 {
-  background-color: #fff;
   color: #700;
 }
 

@@ -1,2 +1,50 @@
-body {
+/* Layout */
+
+ul.noindent, ol.noindent {
+  margin: 0 1.5em 1.5em 0;
 }
+
+/* Typography */
+body {
+  font-family: "Times New Roman", Times, serif;
+}
+
+.trolley {
+  font-family: "Helvetica Neue", Helvetica, sans;
+  font-weight: bold;
+}
+
+#hours, #menu, #footer {
+  text-align: center;
+}
+
+ul.nobullets, ol.nobullets {
+  list-style-type: none;
+}
+
+/* Color */
+
+body {
+  background-color: #000;
+  color: #c7ab83;
+}
+
+h2, h3 {
+  color: #e4d4af;
+}
+
+#header, h1 {
+  background-color: #fff;
+  color: #700;
+}
+
+a, a:visited, a:active, a:hover {
+  color: #c89349;
+}
+
+a:active, a:hover {
+  color: #e4d4af;
+}
+
+.orange-line { color: #f77512; }
+.blue-line   { color: #3e9dfe; }

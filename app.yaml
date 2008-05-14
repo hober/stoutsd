@@ -10,5 +10,9 @@ handlers:
 - url: /js
   static_dir: js
 
+- url: /admin/.*
+  script: $PYTHON_LIB/google/appengine/ext/admin
+  login: admin
+
 - url: /.*
   script: main.py

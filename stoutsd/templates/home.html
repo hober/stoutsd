@@ -2,15 +2,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
     <title>Stout Public House, San Diego, CA</title>
-    <link rel="stylesheet" href="../../css/blueprint/screen.css" type="text/css" media="screen, projection" />
-    <link rel="stylesheet" href="../../css/blueprint/print.css" type="text/css" media="print" />
+    <link rel="stylesheet" href="/css/blueprint/screen.css" type="text/css" media="screen, projection" />
+    <link rel="stylesheet" href="/css/blueprint/print.css" type="text/css" media="print" />
     <!--[if IE]>
-      <link rel="stylesheet" href="../../css/blueprint/ie.css" type="text/css" media="screen, projection" />
+      <link rel="stylesheet" href="/css/blueprint/ie.css" type="text/css" media="screen, projection" />
     <![endif]-->
-    <link rel="stylesheet" href="../../css/screen.css" type="text/css" media="screen, projection" />
-    <link rel="stylesheet" href="../../css/print.css" type="text/css" media="print" />
+    <link rel="stylesheet" href="/css/screen.css" type="text/css" media="screen, projection" />
+    <link rel="stylesheet" href="/css/print.css" type="text/css" media="print" />
     <!--[if IE]>
-      <link rel="stylesheet" href="../../css/ie.css" type="text/css" media="screen, projection" />
+      <link rel="stylesheet" href="/css/ie.css" type="text/css" media="screen, projection" />
     <![endif]-->
   </head>
   <body>
@@ -104,57 +104,15 @@
         <div id="blog" class="span-8">
           <h2>Recent Posts</h2>
           <ol class="hfeed nobullets noindent">
+            {% for post in posts %}
             <li class="hentry">
-              <h3 class="entry-title"><a>This is a sample post title</a></h3>
-              <p><abbr title="" class="published">Apr 16, 2008</abbr></p>
+              <h3 class="entry-title"><a href="{{ post.link }}">{{ post.title }}</a></h3>
+              <p><abbr title="{{ post.published }}" class="published">{{ post.published }}</abbr></p>
               <div class="entry-content">
-                <p>
-                  Mauris tincidunt pede quis pede. Nulla posuere.
-                  Pellentesque viverra augue ac velit. Mauris rhoncus
-                  purus ac est. Nam semper libero eget sapien. Quisque
-                  dapibus volutpat enim. Curabitur aliquam enim id
-                  lectus. Sed enim nisl, malesuada id, vehicula quis,
-                  feugiat id, eros. Nam ultricies, massa eu sagittis
-                  condimentum, justo mi congue risus, a placerat libero
-                  ipsum nec lacus. Aliquam diam magna, interdum vel,
-                  hendrerit quis, suscipit non, mauris. Aenean id nisl.
-                </p>
+                {{ post.content }}
               </div>
             </li>
-            <li class="hentry">
-              <h3 class="entry-title"><a>This is a sample post title</a></h3>
-              <p><abbr title="" class="published">Apr 16, 2008</abbr></p>
-              <div class="entry-content">
-                <p>
-                  Mauris tincidunt pede quis pede. Nulla posuere.
-                  Pellentesque viverra augue ac velit. Mauris rhoncus
-                  purus ac est. Nam semper libero eget sapien. Quisque
-                  dapibus volutpat enim. Curabitur aliquam enim id
-                  lectus. Sed enim nisl, malesuada id, vehicula quis,
-                  feugiat id, eros. Nam ultricies, massa eu sagittis
-                  condimentum, justo mi congue risus, a placerat libero
-                  ipsum nec lacus. Aliquam diam magna, interdum vel,
-                  hendrerit quis, suscipit non, mauris. Aenean id nisl.
-                </p>
-              </div>
-            </li>
-            <li class="hentry">
-              <h3 class="entry-title"><a>This is a sample post title</a></h3>
-              <p><abbr title="" class="published">Apr 16, 2008</abbr></p>
-              <div class="entry-content">
-                <p>
-                  Mauris tincidunt pede quis pede. Nulla posuere.
-                  Pellentesque viverra augue ac velit. Mauris rhoncus
-                  purus ac est. Nam semper libero eget sapien. Quisque
-                  dapibus volutpat enim. Curabitur aliquam enim id
-                  lectus. Sed enim nisl, malesuada id, vehicula quis,
-                  feugiat id, eros. Nam ultricies, massa eu sagittis
-                  condimentum, justo mi congue risus, a placerat libero
-                  ipsum nec lacus. Aliquam diam magna, interdum vel,
-                  hendrerit quis, suscipit non, mauris. Aenean id nisl.
-                </p>
-              </div>
-            </li>
+            {% endfor %}
           </ol>
           <p><a>View Archives</a></p>
         </div>
@@ -163,6 +121,7 @@
             <div id="events" class="span-8">
               <h2>Upcoming Events</h2>
               <ol class="vcalendar nobullets noindent">
+                {% for event in events %}
                 <li class="vevent">
                   <h3>Beer Tasting</h3>
                   <p>12pm &#8212; May 10th, 2008</p>
@@ -171,22 +130,7 @@
                     Appetizers will be served.
                   </p>
                 </li>
-                <li class="vevent">
-                  <h3>Beer Tasting</h3>
-                  <p>12pm &#8212; May 10th, 2008</p>
-                  <p>
-                    15 different beers will be available to taste.
-                    Appetizers will be served.
-                  </p>
-                </li>
-                <li class="vevent">
-                  <h3>Beer Tasting</h3>
-                  <p>12pm &#8212; May 10th, 2008</p>
-                  <p>
-                    15 different beers will be available to taste.
-                    Appetizers will be served.
-                  </p>
-                </li>
+                {% endfor %}
               </ol>
               <p><a>View all events</a></p>
             </div>

@@ -7,10 +7,13 @@ handlers:
 - url: /css
   static_dir: css
 
+- url: /images
+  static_dir: images
+
 - url: /js
   static_dir: js
 
-- url: /admin/.*
+- url: /gae-admin/.*
   script: $PYTHON_LIB/google/appengine/ext/admin
   login: admin
 

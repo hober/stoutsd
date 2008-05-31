@@ -1,19 +1,86 @@
-/* Layout */
+body {
+  font-family: Times, "Times New Roman", serif;
+  font-size: 14px;
+  background: #0a0907 url(/images/pint-gradient.png) repeat-x;
+  color: #e4d4af;
+  padding-top: 0;
+}
 
-ul.noindent, ol.noindent {
-  margin: 0 1.5em 1.5em 0;
+hr {
+  background-color: #e4d4af;
+  color: #e4d4af;
+  height: 1px;
+}
+
+#top hr {
+  width: 200px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #header {
+  margin-top: -6px;
 }
 
-/* Typography */
-body {
-  font-family: "Times New Roman", Times, serif;
+#content {
+  margin-top: 28px;
+}
+
+.headerinfo {
+  margin-top: 16px;
+  color: #770000;
+  font-style: italic;
+  font-weight: bold;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-size: 18px;
+  color: #f6ecd6;
+}
+
+a, a:visited, a:active, a:hover {
+  color: #c89349;
+}
+
+.orange-line { color: #f77512; }
+.blue-line   { color: #3e9dfe; }
+
+ul.noindent, ol.noindent {
+  margin: 0 0 1.5em 0;
+}
+
+#top {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+#top strong {
+  color: #f6ecd6;
+}
+
+#top h1, #top h2, #top h3, #top h4, #top h5, #top h6 {
+  font-size: 20px;
+  text-transform: none;
+  letter-spacing: 0;
+  color: #fefefe;
+}
+
+.minor, .price {
+  font-style:italic;
+}
+
+.price {
+  color: #f6ecd6;
+}
+
+#top .detail {
+  text-transform: none;
+  font-style: italic;
 }
 
 .trolley {
-  font-family: "Helvetica Neue", Helvetica, sans;
+  font-family: Verdana, "Helvetica Neue", Helvetica, sans;
   font-weight: bold;
 }
 
@@ -25,28 +92,32 @@ ul.nobullets, ol.nobullets {
   list-style-type: none;
 }
 
-/* Color */
-
-body {
-  background: #0a0907 url(pint-gradient.png) repeat-x;
-  color: #c7ab83;
+#map img {
+  border: 8px solid #393835;
 }
 
-h2, h3 {
-  color: #e4d4af;
+#mainphoto img {
+  border: 8px solid #c7ab83;
 }
 
-#header, h1 {
-  color: #700;
+p .first {
+  font-variant: small-caps;
 }
 
-a, a:visited, a:active, a:hover {
-  color: #c89349;
+#menulink {
+  font-style: italic;
+  margin: -0.5em auto 0.5em;
 }
 
-a:active, a:hover {
-  color: #e4d4af;
+#menulink .minor {
+  text-transform: none;
 }
 
-.orange-line { color: #f77512; }
-.blue-line   { color: #3e9dfe; }
+#sports .vevent .dtstart {
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+#sports .vevent .summary {
+  font-size: 12px;
+}

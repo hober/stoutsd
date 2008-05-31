@@ -10,3 +10,6 @@ This is a test of the emergency broadcast system.
 This is only a test.
 """, published=db.DateTimeProperty.now())
     return render_to_response('home.html', dict(posts=Post.all()))
+
+def admin(request):
+    return render_to_response('admin.html', dict())

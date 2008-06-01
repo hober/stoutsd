@@ -1,0 +1,25 @@
+body {
+}
+
+#logout-tool p {
+  background-color: #ffe;
+  margin: 8px;
+  padding: 8px;
+  border: 1px solid black;
+  border-radius: 8px;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+}
+
+ul.errorlist {
+  margin: 0;
+  padding: 0;
+}
+.errorlist li {
+  background-color: red;
+  color: white;
+  display: block;
+  font-size: 10px;
+  margin: 0 0 3px;
+  padding: 4px 5px;
+}

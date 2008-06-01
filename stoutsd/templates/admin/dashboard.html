@@ -1,0 +1,49 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Stout Public House admin dashboard{% endblock %}
+
+{% block header %}
+<h1>Stout Public House &#8212; Administration</h1>
+{% endblock %}
+
+{% block content %}
+
+<ul>
+<li>
+<div><a href="/admin/copy">Home page copy</a></div>
+<div>
+  Edit the various bits of text that appear on the home page.
+</div>
+</li>
+<li>
+<div><a href="/admin/menu">Menu</a></div>
+<div>
+  Add, edit, organize, and remove menu items. Set the "Soup of the Day"
+  schedule. Set today's specials.
+</div>
+</li>
+<li>
+<div><a href="/admin/posts">Posts</a></div>
+<div>
+  Add, edit, and remove news updates.
+</div>
+</li>
+<li>
+<div><a href="/admin/events">Events</a></div>
+<div>
+  Add, edit, and remove events.
+</div>
+</li>
+<li>
+<div><a href="/admin/sports">Sports</a></div>
+<div>Select which sporting events should show up.</div>
+</li>
+<li>
+<div><a href="/admin/photos">Photos</a></div>
+<div>
+  Add, edit, and remove photos. Pick which ones should show up
+  front-and-center.
+</div>
+</li>
+</ul>
+{% endblock %}

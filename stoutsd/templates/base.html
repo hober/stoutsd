@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <title>{% block pagetitle %}Stout Public House, San Diego, CA{% endblock %}</title>
+    <link rel="stylesheet" href="/css/blueprint/screen.css" type="text/css" media="screen, projection" />
+    <link rel="stylesheet" href="/css/blueprint/print.css" type="text/css" media="print" />
+    <!--[if IE]>
+      <link rel="stylesheet" href="/css/blueprint/ie.css" type="text/css" media="screen, projection" />
+    <![endif]-->
+    <link rel="stylesheet" href="/css/screen.css" type="text/css" media="screen, projection" />
+    <link rel="stylesheet" href="/css/print.css" type="text/css" media="print" />
+    <!--[if IE]>
+      <link rel="stylesheet" href="/css/ie.css" type="text/css" media="screen, projection" />
+    <![endif]-->
+  </head>
+  <body>
+    <div id="header" class="container">
+      {% block header %}
+      <div class="span-4 headerinfo">Established 2007</div>
+      <div class="span-16"><img src="/images/logo.jpg" alt="Stout Public House" /></div>
+      <div class="span-4 last headerinfo">ph. (619)-702-7933</div>
+      {% endblock %}
+    </div>
+    <div id="content" class="container">{% block content %}{% endblock %}</div>
+    <div id="footer" class="container">
+      {% block footer %}
+      <div id="rights" class="span-24">
+        Copyright &#169; 2008 Stout Public House. All rights reserved.
+      </div>
+      <div class="span-16">
+        Design by Brewer Design Group. Development by Edward O'Connor.
+        Photography by Jay Dailey.
+      </div>
+      <div class="span-8 last">
+        Powered by Django. Hosted on Google App Engine.
+      </div>
+      {% endblock %}
+    </div>
+  </body>
+</html>

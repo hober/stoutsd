@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <title>{% block title %}Stout Public House, San Diego, CA{% endblock %}</title>
+    <link rel="stylesheet" href="/css/blueprint/screen.css" type="text/css" media="screen, projection" />
+    <link rel="stylesheet" href="/css/blueprint/print.css" type="text/css" media="print" />
+    <!--[if IE]>
+      <link rel="stylesheet" href="/css/blueprint/ie.css" type="text/css" media="screen, projection" />
+    <![endif]-->
+    <link rel="stylesheet" href="/css/admin/screen.css" type="text/css" media="screen, projection" />
+    <link rel="stylesheet" href="/css/admin/print.css" type="text/css" media="print" />
+    <!--[if IE]>
+      <link rel="stylesheet" href="/css/admin/ie.css" type="text/css" media="screen, projection" />
+    <![endif]-->
+  </head>
+  <body>
+    <div id="header" class="container">
+      <div class="span-20">
+        {% block header %}
+        {% endblock %}
+      </div>
+      <div id="logout-tool" class="span-4 last">
+        <p>Welcome, {{ nickname }}.<br />
+        <a href="{{ logout }}">Logout</a></p>
+      </div>
+    </div>
+    <div id="content" class="container">
+      {% block content %}
+      {% endblock %}
+    </div>
+    <div id="footer" class="container">
+      {% block footer %}
+      <div id="rights" class="span-24">
+        Copyright &#169; 2008 Stout Public House. All rights reserved.
+      </div>
+      <div class="span-16">
+        Design by Brewer Design Group. Development by Edward O'Connor.
+        Photography by Jay Dailey.
+      </div>
+      <div class="span-8 last">
+        Powered by Django. Hosted on Google App Engine.
+      </div>
+      {% endblock %}
+    </div>
+  </body>
+</html>

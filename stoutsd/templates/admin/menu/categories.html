@@ -1,0 +1,36 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Stout Public House menu editor{% endblock %}
+
+{% block header %}
+<h1>Stout Public House &#8212; Menu editor</h1>
+{% endblock %}
+
+{% block content %}
+
+<h2>Menu Categories</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for c in categories %}
+    <tr>
+      <td>{{ c.name }}</td>
+      <td>{{ c.description }}</td>
+    </tr>
+  </tbody>
+  {%endfor %}
+</table>
+
+<h2>New Menu Category</h2>
+<form action="/admin/menu/categories" method="POST">
+  {{ new_category_form.as_p }}
+  <p><input type="submit" value="Submit" /></p>
+</form>
+
+{% endblock %}

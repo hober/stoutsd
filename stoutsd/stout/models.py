@@ -1,8 +1,5 @@
 from google.appengine.ext import db
 
-# class Photo(db.Model):
-#     pass
-
 class EntryMixin:
     slug = db.StringProperty(multiline=False) # ?
     title = db.StringProperty(multiline=False)
@@ -16,3 +13,16 @@ class Event(db.Model, EntryMixin):
 
 class Post(db.Model, EntryMixin):
     pass
+
+MENU_CATEGORIES=["starter", "soup", "salad", "sandwich", "pub-fare",
+                 "entree", "side", "dessert"]
+
+class MenuCategory(db.Model):
+    name = db.StringProperty(multiline=False)
+    description = db.StringProperty(multiline=False)
+
+class MenuItem(db.Model):
+    category = db.ReferenceProperty(MenuCategory)
+    name = db.StringProperty(multiline=False)
+    price = db.StringProperty(multiline=False)
+    description = db.StringProperty(multiline=False)

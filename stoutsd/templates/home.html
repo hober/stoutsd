@@ -1,190 +1,156 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
-  <head>
-    <title>Stout Public House, San Diego, CA</title>
-    <link rel="stylesheet" href="/css/blueprint/screen.css" type="text/css" media="screen, projection" />
-    <link rel="stylesheet" href="/css/blueprint/print.css" type="text/css" media="print" />
-    <!--[if IE]>
-      <link rel="stylesheet" href="/css/blueprint/ie.css" type="text/css" media="screen, projection" />
-    <![endif]-->
-    <link rel="stylesheet" href="/css/screen.css" type="text/css" media="screen, projection" />
-    <link rel="stylesheet" href="/css/print.css" type="text/css" media="print" />
-    <!--[if IE]>
-      <link rel="stylesheet" href="/css/ie.css" type="text/css" media="screen, projection" />
-    <![endif]-->
-  </head>
-  <body>
-    <div id="header" class="container">
-      <div class="span-4 headerinfo">Established 2007</div>
-      <div class="span-16"><img src="/images/logo.jpg" alt="Stout Public House" /></div>
-      <div class="span-4 last headerinfo">ph. (619)-702-7933</div>
+{% extends "base.html" %}
+{% block content %}
+<div id="top" class="span-24">
+  <div id="hours" class="span-7">
+    <h2>Hours <span class="minor">of</span> Operation</h2>
+    <div>Monday&#8211;Wednesday</div>
+    <div class="detail"><strong>11am&#8211;Midnight</strong></div>
+    <div>Thursday&#8211;Sunday</div>
+    <div class="detail"><strong>11am&#8211;2am</strong></div>
+    <div class="detail">Serving food daily from <strong>11am&#8211;11pm</strong></div>
+    <hr />
+    <h2>Happy Hour</h2>
+    <div>Daily</div>
+    <div class="detail"><strong>4pm&#8211;8pm</strong></div>
+    <hr />
+  </div>
+  <div id="mainphoto" class="span-9">
+    <img src="http://farm3.static.flickr.com/2367/2478737526_5abce860c1.jpg?v=1210350336"
+         width="311" height="231" alt="" />
+  </div>
+  <div id="menu" class="span-8 last">
+    <h2>Daily Specials</h2>
+    <ul class="nobullets noindent">
+      <li>Guinness Pot-Pie &#8212; <i class="price">$11.99</i></li>
+      <li>Blackened Cod Filet &#8212; <i class="price">$13.99</i></li>
+      <li>Irish Potato Stew &#8212; <i class="price">$8.99</i></li>
+    </ul>
+    <hr />
+    <h2>Soup <span class="minor">of the</span> Day</h2>
+    <ul class="nobullets noindent">
+      <li>Clam Chowder &#8212; $5.99</li>
+    </ul>
+    <hr />
+    <div id="menulink">View <span class="minor">the</span> Menu</div>
+    <hr />
+  </div>
+</div>
+<div id="middle" class="span-24">
+  <div id="about" class="span-11 append-1">
+    <h2>A Bit About Stout</h2>
+    <p>
+      <span class="first">Stout Public House is downtown San
+      Diego's neighborhood Irish pub.</span> We feature a quick
+      and satisfying lunch including daily specials. Stop by after
+      work or before a ball game for one of the best happy hours
+      in town. Stout offers a large selection of fresh starters,
+      soups, salads, and entr&#233;es. Stylish d&#233;cor, great
+      food, excellent service and a wide selection of beers,
+      wines, and spirits make Stout Public House San Diego's
+      premier place for dining and socializing.
+    </p>
+    <h3>Other Services</h3>
+    <p>
+      Stout Public House is available for private parties and
+      holiday parties (10&#8211;100 people). Catering is available
+      to all offices in downtown San Diego. <a>Contact us</a> for
+      more information.
+    </p>
+  </div>
+  <div id="location" class="span-12 last">
+    <h2>Location <span class="small">1125 6th Avenue, San Diego, CA 92101</span></h2>
+    <div id="map" class="span-5">
+      <a><img src="/images/map.png" alt="" /></a>
+      <br />
+      <a>Click for driving instructions</a>
     </div>
-    <div id="content" class="container">
-      <div id="top" class="span-24">
-        <div id="hours" class="span-7">
-          <h2>Hours <span class="minor">of</span> Operation</h2>
-          <div>Monday&#8211;Wednesday</div>
-          <div class="detail"><strong>11am&#8211;Midnight</strong></div>
-          <div>Thursday&#8211;Sunday</div>
-          <div class="detail"><strong>11am&#8211;2am</strong></div>
-          <div class="detail">Serving food daily from <strong>11am&#8211;11pm</strong></div>
-          <hr />
-          <h2>Happy Hour</h2>
-          <div>Daily</div>
-          <div class="detail"><strong>4pm&#8211;8pm</strong></div>
-          <hr />
+    <div id="trolley" class="span-7 last">
+      <h3>Via Trolley</h3>
+      <p class="trolley">
+        <a href="http://transit.511sd.com/Services/Default.aspx"
+           ><span class="orange-line">Orange Line</span> &amp; <span
+           class="blue-line">Blue Line</span></a>
+      </p>
+      <p>
+        Get off at the 5th Avenue station and walk toward 6th.
+        We&#8217;re right across the street to the north.
+      </p>
+      <p>
+        You can&#8217;t miss the sign.
+      </p>
+    </div>
+  </div>
+</div>
+<div id="bottom" class="span-24">
+  <div id="blog" class="span-8">
+    <h2>Recent Posts</h2>
+    <ol class="hfeed nobullets noindent">
+      {% for post in posts %}
+      <li class="hentry">
+        <h3 class="entry-title"><a href="{{ post.link }}">{{ post.title }}</a></h3>
+        <p><abbr title="{{ post.published }}" class="published">{{ post.published }}</abbr></p>
+        <div class="entry-content">
+          {{ post.content }}
         </div>
-        <div id="mainphoto" class="span-9">
-          <img src="http://farm3.static.flickr.com/2367/2478737526_5abce860c1.jpg?v=1210350336"
-               width="311" height="231" alt="" />
-        </div>
-        <div id="menu" class="span-8 last">
-          <h2>Daily Specials</h2>
-          <ul class="nobullets noindent">
-            <li>Guinness Pot-Pie &#8212; <i class="price">$11.99</i></li>
-            <li>Blackened Cod Filet &#8212; <i class="price">$13.99</i></li>
-            <li>Irish Potato Stew &#8212; <i class="price">$8.99</i></li>
-          </ul>
-          <hr />
-          <h2>Soup <span class="minor">of the</span> Day</h2>
-          <ul class="nobullets noindent">
-            <li>Clam Chowder &#8212; $5.99</li>
-          </ul>
-          <hr />
-          <div id="menulink">View <span class="minor">the</span> Menu</div>
-          <hr />
-        </div>
-      </div>
-      <div id="middle" class="span-24">
-        <div id="about" class="span-11 append-1">
-          <h2>A Bit About Stout</h2>
-          <p>
-            <span class="first">Stout Public House is downtown San
-            Diego's neighborhood Irish pub.</span> We feature a quick
-            and satisfying lunch including daily specials. Stop by after
-            work or before a ball game for one of the best happy hours
-            in town. Stout offers a large selection of fresh starters,
-            soups, salads, and entr&#233;es. Stylish d&#233;cor, great
-            food, excellent service and a wide selection of beers,
-            wines, and spirits make Stout Public House San Diego's
-            premier place for dining and socializing.
-          </p>
-          <h3>Other Services</h3>
-          <p>
-            Stout Public House is available for private parties and
-            holiday parties (10&#8211;100 people). Catering is available
-            to all offices in downtown San Diego. <a>Contact us</a> for
-            more information.
-          </p>
-        </div>
-        <div id="location" class="span-12 last">
-          <h2>Location <span class="small">1125 6th Avenue, San Diego, CA 92101</span></h2>
-          <div id="map" class="span-5">
-            <a><img src="/images/map.png" alt="" /></a>
-            <br />
-            <a>Click for driving instructions</a>
-          </div>
-          <div id="trolley" class="span-7 last">
-            <h3>Via Trolley</h3>
-            <p class="trolley">
-              <a href="http://transit.511sd.com/Services/Default.aspx"><span
-              class="orange-line">Orange Line</span> &amp; <span
-              class="blue-line">Blue Line</span></a>
-            </p>
+      </li>
+      {% endfor %}
+    </ol>
+    <p><a>View Archives</a></p>
+  </div>
+  <div id="bottom-right" class="span-16 last">
+    <div id="bottom-right-top" class="span-16 last">
+      <div id="events" class="span-8">
+        <h2>Upcoming Events</h2>
+        <ol class="vcalendar nobullets noindent">
+          {% for event in events %}
+          <li class="vevent">
+            <h3>Beer Tasting</h3>
+            <p>12pm &#8212; May 10th, 2008</p>
             <p>
-              Get off at the 5th Avenue station and walk toward 6th.
-              We&#8217;re right across the street to the north.
+              15 different beers will be available to taste.
+              Appetizers will be served.
             </p>
-            <p>
-              You can&#8217;t miss the sign.
-            </p>
-          </div>
-        </div>
+          </li>
+          {% endfor %}
+        </ol>
+        <p><a>View all events</a></p>
       </div>
-      <div id="bottom" class="span-24">
-        <div id="blog" class="span-8">
-          <h2>Recent Posts</h2>
-          <ol class="hfeed nobullets noindent">
-            {% for post in posts %}
-            <li class="hentry">
-              <h3 class="entry-title"><a href="{{ post.link }}">{{ post.title }}</a></h3>
-              <p><abbr title="{{ post.published }}" class="published">{{ post.published }}</abbr></p>
-              <div class="entry-content">
-                {{ post.content }}
-              </div>
-            </li>
-            {% endfor %}
-          </ol>
-          <p><a>View Archives</a></p>
-        </div>
-        <div id="bottom-right" class="span-16 last">
-          <div id="bottom-right-top" class="span-16 last">
-            <div id="events" class="span-8">
-              <h2>Upcoming Events</h2>
-              <ol class="vcalendar nobullets noindent">
-                {% for event in events %}
-                <li class="vevent">
-                  <h3>Beer Tasting</h3>
-                  <p>12pm &#8212; May 10th, 2008</p>
-                  <p>
-                    15 different beers will be available to taste.
-                    Appetizers will be served.
-                  </p>
-                </li>
-                {% endfor %}
-              </ol>
-              <p><a>View all events</a></p>
-            </div>
-            <div id="sports" class="span-8 last">
-              <h2>NHL Schedule</h2>
-              <ol class="vcalendar nobullets noindent">
-                <li class="vevent">
-                  <div class="dtstart">Thursday 05/08/08</div>
-                  <div class="summary">Dallas vs. Detroit &#8212; 12pm</div>
-                </li>
-                <li class="vevent">
-                  <div class="dtstart">Thursday 05/08/08</div>
-                  <div class="summary">Dallas vs. Detroit &#8212; 12pm</div>
-                </li>
-              </ol>
-            </div>
-          </div>
-          <div id="bottom-right-bottom" class="span-16 last">
-            <div id="photos" class="span-12">
-              <h2>Recent Photos</h2>
-              <img src="" alt="" />
-              <img src="" alt="" />
-              <img src="" alt="" />
-              <img src="" alt="" />
-              <img src="" alt="" />
-              <img src="" alt="" />
-              <img src="" alt="" />
-              <img src="" alt="" />
-            </div>
-            <div id="contact" class="span-4 last">
-              <h2>Contact us</h2>
-              <p>
-                mark@stoutsd.com
-                dave@stoutsd.com
-                info@stoutsd.com
-                events@stoutsd.com
-              </p>
-            </div>
-          </div>
-        </div>
+      <div id="sports" class="span-8 last">
+        <h2>NHL Schedule</h2>
+        <ol class="vcalendar nobullets noindent">
+          <li class="vevent">
+            <div class="dtstart">Thursday 05/08/08</div>
+            <div class="summary">Dallas vs. Detroit &#8212; 12pm</div>
+          </li>
+          <li class="vevent">
+            <div class="dtstart">Thursday 05/08/08</div>
+            <div class="summary">Dallas vs. Detroit &#8212; 12pm</div>
+          </li>
+        </ol>
       </div>
     </div>
-    <div id="footer" class="container">
-      <div id="rights" class="span-24">
-        Copyright &#169; 2008 Stout Public House. All rights reserved.
+    <div id="bottom-right-bottom" class="span-16 last">
+      <div id="photos" class="span-12">
+        <h2>Recent Photos</h2>
+        <img src="" alt="" />
+        <img src="" alt="" />
+        <img src="" alt="" />
+        <img src="" alt="" />
+        <img src="" alt="" />
+        <img src="" alt="" />
+        <img src="" alt="" />
+        <img src="" alt="" />
       </div>
-      <div class="span-16">
-        Design by Brewer Design Group. Development by Edward O'Connor.
-        Photography by Jay Dailey.
-      </div>
-      <div class="span-8 last">
-        Powered by Django. Hosted on Google App Engine.
+      <div id="contact" class="span-4 last">
+        <h2>Contact us</h2>
+        <p>
+          mark@stoutsd.com
+          dave@stoutsd.com
+          info@stoutsd.com
+          events@stoutsd.com
+        </p>
       </div>
     </div>
-  </body>
-</html>
+  </div>
+</div>
+{% endblock %}

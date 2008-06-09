@@ -66,6 +66,11 @@ ul.noindent, ol.noindent {
   color: #fefefe;
 }
 
+h1.span-16 {
+  float: left;
+  margin-right: 10px;
+}
+
 .minor, .price {
   font-style:italic;
 }
@@ -74,9 +79,24 @@ ul.noindent, ol.noindent {
   color: #f6ecd6;
 }
 
-#top .detail {
+#hours dl {
+  margin-bottom: 0;
+}
+
+#hours dt {
+  font-weight: normal;
+}
+
+#hours dd, #hours p, #location h2 .small {
   text-transform: none;
   font-style: italic;
+  color: #e4d4af;
+  font-weight: normal;
+
+}
+
+#hours dd {
+  margin: 0 0 0.75em 0;
 }
 
 .trolley {
@@ -84,7 +104,7 @@ ul.noindent, ol.noindent {
   font-weight: bold;
 }
 
-#hours, #menu, #footer {
+#hours, #dujour, #footer {
   text-align: center;
 }
 
@@ -96,7 +116,10 @@ ul.nobullets, ol.nobullets {
   border: 8px solid #393835;
 }
 
-#mainphoto img {
+#slideshow {
+  background-color: #c7ab83;
+  width: 311px;
+  height: 274px;
   border: 8px solid #c7ab83;
 }
 
@@ -120,4 +143,17 @@ p .first {
 
 #sports .vevent .summary {
   font-size: 12px;
+}
+
+
+/*
+Images are wrapped in divs classed "flickr_badge_image" with ids
+"flickr_badge_imageX" where "X" is an integer specifying ordinal position.
+Below are some styles to get you started!
+*/
+.flickr_badge_image {
+  display: inline;
+}
+.flickr_badge_image img {
+  margin: 8px;
 }

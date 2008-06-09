@@ -7,17 +7,17 @@
     <!--[if IE]>
       <link rel="stylesheet" href="/css/blueprint/ie.css" type="text/css" media="screen, projection" />
     <![endif]-->
-    <link rel="stylesheet" href="/css/screen.css" type="text/css" media="screen, projection" />
-    <link rel="stylesheet" href="/css/print.css" type="text/css" media="print" />
-    <!--[if IE]>
-      <link rel="stylesheet" href="/css/ie.css" type="text/css" media="screen, projection" />
-    <![endif]-->
+    {% block stylesheets %}
+    {% endblock %}
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script>
+    {% block javascripts %}
+    {% endblock %}
   </head>
   <body>
     <div id="header" class="container">
       {% block header %}
       <div class="span-4 headerinfo">Established 2007</div>
-      <div class="span-16"><img src="/images/logo.jpg" alt="Stout Public House" /></div>
+      <h1 class="span-16"><a href="/"><img src="/images/logo.jpg" alt="Stout Public House" /></a></h1>
       <div class="span-4 last headerinfo">ph. (619)-702-7933</div>
       {% endblock %}
     </div>
@@ -28,11 +28,13 @@
         Copyright &#169; 2008 Stout Public House. All rights reserved.
       </div>
       <div class="span-16">
-        Design by Brewer Design Group. Development by Edward O'Connor.
+        Design by <a href="http://www.brewerdesigngroup.com/">Brewer Design Group</a>.
+        Development by <a href="http://edward.oconnor.cx/">Edward O'Connor</a>.
         Photography by Jay Dailey.
       </div>
       <div class="span-8 last">
-        Powered by Django. Hosted on Google App Engine.
+        Powered by <a href="http://www.djangoproject.com/">Django</a>.
+        Hosted on <a href="http://code.google.com/appengine/">Google App Engine</a>.
       </div>
       {% endblock %}
     </div>

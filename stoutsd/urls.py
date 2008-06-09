@@ -1,9 +1,15 @@
 from django.conf.urls.defaults import patterns
 
-urlpatterns = patterns('',
-    (r'^admin/menu/categories?$', 'stoutsd.stout.views.menu_category_admin'),
-    (r'^admin/menu/items?$', 'stoutsd.stout.views.menu_item_admin'),
-    (r'^admin/menu/?$', 'stoutsd.stout.views.menu_admin'),
-    (r'^admin/?$', 'stoutsd.stout.views.admin'),
-    (r'^$', 'stoutsd.stout.views.home'),
+urlpatterns = patterns('stoutsd.stout.admin.views',
+    # Administrative interface
+    (r'^admin/menu/categories?$', 'menu_categories'),
+    (r'^admin/menu/items?$', 'menu_items'),
+    (r'^admin/menu/?$', 'menu_dashboard'),
+    (r'^admin/?$', 'dashboard'),
+)
+
+urlpatterns += patterns('stoutsd.stout.views',
+    # Public-facing pages
+    (r'^menu/?$', 'menu'),
+    (r'^$', 'home'),
 )

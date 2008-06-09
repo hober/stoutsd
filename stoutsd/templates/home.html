@@ -1,24 +1,28 @@
-{% extends "base.html" %}
+{% extends "public.html" %}
+{% block pagetitle %}Stout Public House, San Diego, CA{% endblock %}
 {% block content %}
 <div id="top" class="span-24">
   <div id="hours" class="span-7">
     <h2>Hours <span class="minor">of</span> Operation</h2>
-    <div>Monday&#8211;Wednesday</div>
-    <div class="detail"><strong>11am&#8211;Midnight</strong></div>
-    <div>Thursday&#8211;Sunday</div>
-    <div class="detail"><strong>11am&#8211;2am</strong></div>
-    <div class="detail">Serving food daily from <strong>11am&#8211;11pm</strong></div>
+    <dl>
+    <dt>Monday&#8211;Wednesday</dt>
+    <dd><strong>11am&#8211;Midnight</strong></dd>
+    <dt>Thursday&#8211;Sunday</dt>
+    <dd><strong>11am&#8211;2am</strong></dd>
+    </dl>
+    <p>Serving food daily from <strong>11am&#8211;11pm</strong></p>
     <hr />
     <h2>Happy Hour</h2>
-    <div>Daily</div>
-    <div class="detail"><strong>4pm&#8211;8pm</strong></div>
+    <dl>
+    <dt>Daily</dt>
+    <dd><strong>4pm&#8211;8pm</strong></dd>
+    </dl>
     <hr />
   </div>
   <div id="mainphoto" class="span-9">
-    <img src="http://farm3.static.flickr.com/2367/2478737526_5abce860c1.jpg?v=1210350336"
-         width="311" height="231" alt="" />
+    <img id="slideshow" href="/images/stout-main.jpg" alt="Stout Public House" />
   </div>
-  <div id="menu" class="span-8 last">
+  <div id="dujour" class="span-8 last">
     <h2>Daily Specials</h2>
     <ul class="nobullets noindent">
       <li>Guinness Pot-Pie &#8212; <i class="price">$11.99</i></li>
@@ -31,7 +35,9 @@
       <li>Clam Chowder &#8212; $5.99</li>
     </ul>
     <hr />
-    <div id="menulink">View <span class="minor">the</span> Menu</div>
+    <div id="menulink">
+      <a href="/menu">View <span class="minor">the</span> Menu</a>
+    </div>
     <hr />
   </div>
 </div>
@@ -60,9 +66,9 @@
   <div id="location" class="span-12 last">
     <h2>Location <span class="small">1125 6th Avenue, San Diego, CA 92101</span></h2>
     <div id="map" class="span-5">
-      <a><img src="/images/map.png" alt="" /></a>
+      <a href="http://maps.google.com/maps?f=q&amp;hl=en&amp;geocode=&amp;q=1125+6th+Avenue,+San+Diego,+CA+92101&amp;sll=32.746392,-117.153087&amp;sspn=0.007147,0.012252&amp;ie=UTF8&amp;ll=32.719566,-117.159212&amp;spn=0.007149,0.012252&amp;z=16"><img src="/images/map.png" alt="" /></a>
       <br />
-      <a>Click for driving instructions</a>
+      <a href="http://maps.google.com/maps?f=q&amp;hl=en&amp;geocode=&amp;q=1125+6th+Avenue,+San+Diego,+CA+92101&amp;sll=32.746392,-117.153087&amp;sspn=0.007147,0.012252&amp;ie=UTF8&amp;ll=32.719566,-117.159212&amp;spn=0.007149,0.012252&amp;z=16">Click for driving instructions</a>
     </div>
     <div id="trolley" class="span-7 last">
       <h3>Via Trolley</h3>
@@ -132,22 +138,19 @@
     <div id="bottom-right-bottom" class="span-16 last">
       <div id="photos" class="span-12">
         <h2>Recent Photos</h2>
-        <img src="" alt="" />
-        <img src="" alt="" />
-        <img src="" alt="" />
-        <img src="" alt="" />
-        <img src="" alt="" />
-        <img src="" alt="" />
-        <img src="" alt="" />
-        <img src="" alt="" />
+        <!-- Start of Flickr Badge -->
+        <div id="flickr_badge_uber_wrapper"><div id="flickr_badge_wrapper">
+          <script type="text/javascript" src="http://www.flickr.com/badge_code_v2.gne?count=8&amp;display=random&amp;size=t&amp;layout=x&amp;source=user_set&amp;user=37699593@N00&amp;set=72157604968715075&amp;context=in%2Fset-72157604968715075%2F"></script>
+        </div></div>
+        <!-- End of Flickr Badge -->
       </div>
       <div id="contact" class="span-4 last">
         <h2>Contact us</h2>
         <p>
-          mark@stoutsd.com
-          dave@stoutsd.com
-          info@stoutsd.com
-          events@stoutsd.com
+          <a href="mailto:mark@stoutsd.com">mark@stoutsd.com</a>
+          <a href="mailto:dave@stoutsd.com">dave@stoutsd.com</a>
+          <a href="mailto:info@stoutsd.com">info@stoutsd.com</a>
+          <a href="mailto:events@stoutsd.com">events@stoutsd.com</a>
         </p>
       </div>
     </div>

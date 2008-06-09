@@ -55,7 +55,7 @@ ul.noindent, ol.noindent {
   letter-spacing: 1px;
 }
 
-#top strong {
+strong {
   color: #f6ecd6;
 }
 
@@ -156,4 +156,27 @@ Below are some styles to get you started!
 }
 .flickr_badge_image img {
   margin: 8px;
+}
+
+#menu ul li {
+margin: 0 0 1em 0;
+}
+
+#menu ul li .name {
+  font-weight: bold;
+}
+
+#menu ul li .price {
+  float: right;
+  margin-top: -1.5em;
+  text-align: right;
+  margin-left: 1em;
+}
+
+#menu ul li .description {
+  display: block;
+}
+
+#menu h1, #menu h2 {
+  font-variant: small-caps;
 }

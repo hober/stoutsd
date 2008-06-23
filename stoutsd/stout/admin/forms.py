@@ -1,3 +1,5 @@
+# Copyright (C) 2008 Stout Public House. All Rights Reserved
+
 from django import newforms as forms
 from google.appengine.ext import db
 from stoutsd.stout.models import MenuCategory, MenuItem

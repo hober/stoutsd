@@ -1,3 +1,5 @@
+/* Copyright (C) 2008 Stout Public House. All Rights Reserved */
+
 var Stout = function () {
   var images = ["/images/stout-main.jpg", "/images/guinness-bw.jpg",
                 "/images/pub-open.jpg"];

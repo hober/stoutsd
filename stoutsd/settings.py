@@ -1,3 +1,5 @@
+# Copyright (C) 2008 Stout Public House. All Rights Reserved
+
 import os
 ROOT_URLCONF = 'stoutsd.urls'
 

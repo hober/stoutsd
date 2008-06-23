@@ -1,3 +1,5 @@
+# Copyright (C) 2008 Stout Public House. All Rights Reserved
+
 from django.conf.urls.defaults import patterns
 
 # Administrative interface

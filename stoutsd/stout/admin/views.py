@@ -1,6 +1,7 @@
 # Copyright (C) 2008 Stout Public House. All Rights Reserved
 
 import calendar
+import datetime
 import os
 
 import yaml
@@ -11,9 +12,9 @@ from django.shortcuts import render_to_response
 from google.appengine.api import users
 from google.appengine.ext import db
 
-from stoutsd.stout.models import MenuItem, MenuCategory, SoupOfTheDay
+from stoutsd.stout.models import MenuItem, MenuCategory, SoupOfTheDay, Post
 from stoutsd.stout.admin.forms import MenuItemForm, MenuCategoryForm, \
-    SoupOfTheDayForm
+    SoupOfTheDayForm, PostForm
 
 ADMINS=['hober0@gmail.com']
 def adminonly(url):
@@ -34,17 +35,13 @@ def render_admin_template(tmpl, context):
     context['logout'] = users.create_logout_url("/")
     return render_to_response(tmpl, context)
 
-@adminonly('/admin/init')
-def init (request):
-    """"""
-    pass
-
 @adminonly('/admin')
 def dashboard(request):
     return render_admin_template('admin/dashboard.html', dict())
 
 @adminonly('/admin/load-fixtures')
 def load_fixtures(request):
+    """Populate the data store with an initial set of data."""
     fixtures = yaml.load(open(os.path.dirname(__file__) + '/../../fixtures.yaml', 'r'))
 
     menu_categories = fixtures['MenuCategory']
@@ -82,44 +79,40 @@ def menu(request):
     return render_admin_template('admin/menu/dashboard.html', dict())
 
 @adminonly('/admin/menu/categories')
-def menu_categories(request):
+def list_menu_categories(request):
+    categories = db.GqlQuery("SELECT * FROM MenuCategory")
+    return render_admin_template('admin/menu/categories/list.html', dict(
+            categories=categories))
+
+@adminonly('/admin/menu/categories')
+def edit_menu_category(request, key=None):
     if request.method == 'POST':
         form = MenuCategoryForm(request.POST)
         if form.is_valid():
-            cat = MenuCategory(key_name=form.clean_data['key'],
-                               name=form.clean_data['name'],
-                               description=form.clean_data['description'])
+            cat = MenuCategory.from_form(form)
             cat.put()
     else:
         form=MenuCategoryForm()
-
-    categories = db.GqlQuery("SELECT * FROM MenuCategory")
-
-    return render_admin_template('admin/menu/categories.html', dict(
-            new_category_form=form,
-            categories=categories))
+    return render_admin_template('admin/menu/categories/edit.html', dict(
+            new_category_form=form))
 
 @adminonly('/admin/menu/items')
-def menu_items(request):
+def list_menu_items(request):
+    items = db.GqlQuery("SELECT * FROM MenuItem")
+    return render_admin_template('admin/menu/items/list.html', dict(
+            items=items))
+
+@adminonly('/admin/menu/items')
+def edit_menu_item(request, key=None):
     if request.method == 'POST':
         form = MenuItemForm(request.POST)
         if form.is_valid():
-            cat_key = form.clean_data['category']
-            cat = MenuCategory.get(cat_key)
-
-            item = MenuItem(category=cat,
-                            name=form.clean_data['name'],
-                            price=form.clean_data['price'],
-                            description=form.clean_data['description'],
-                            show_on_menu=form.clean_data['display_on_menu'])
+            item = MenuItem.from_form(form)
             item.put()
     else:
         form=MenuItemForm()
 
-    items = db.GqlQuery("SELECT * FROM MenuItem")
-
-    return render_admin_template('admin/menu/items.html', dict(
-            items=items,
+    return render_admin_template('admin/menu/items/edit.html', dict(
             new_item_form=form))
 
 @adminonly('/admin/menu/soups')
@@ -136,3 +129,44 @@ def soup_of_the_day(request):
 
     return render_admin_template('admin/menu/soups.html', dict(
             soup_of_the_day_form=form))
+
+@adminonly('/admin/posts')
+def list_posts(request):
+    posts = db.GqlQuery("SELECT * FROM Post")
+    return render_admin_template('admin/posts/list.html', dict(
+            posts=posts))
+
+@adminonly('/admin/posts/edit')
+def edit_post(request, key=None):
+    post = None
+    if key is not None:
+        post = Post.get(key)
+    if request.method == 'POST':
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = Post.from_form(form)
+            post.put()
+            return HttpResponseRedirect('/admin/posts/')
+    elif post:
+        form = PostForm({'title': post.title,
+                         'content': post.content,
+                         'publish': (post.published is not None),
+                         # Hidden
+                         'key': post.key(),
+                         'slug': post.slug,
+                         'published': post.published,
+                         'updated': post.updated})
+    else:
+        form = PostForm()
+
+    return render_admin_template('admin/posts/edit.html', dict(
+            post=post, post_form=form))
+
+@adminonly('/admin/posts/delete/')
+def delete_post(request, key=None):
+    post = None
+    if key is not None:
+        post = Post.get(key)
+    if key and request.method == 'POST':
+        post.delete()
+    return HttpResponseRedirect('/admin/posts/')

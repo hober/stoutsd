@@ -1,5 +1,5 @@
-{# Copyright (C) 2008 Stout Public House. All Rights Reserved #}
 {% extends "public.html" %}
+{# Copyright (C) 2008 Stout Public House. All Rights Reserved #}
 {% block pagetitle %}Stout Public House, San Diego, CA{% endblock %}
 {% block content %}
 <div id="top" class="span-24">
@@ -30,11 +30,13 @@
       <li>Blackened Cod Filet &#8212; <i class="price">$13.99</i></li>
       <li>Irish Potato Stew &#8212; <i class="price">$8.99</i></li>
     </ul>
+    {% if soup %}
     <hr />
     <h2>Soup <span class="minor">of the</span> Day</h2>
     <ul class="nobullets noindent">
       <li>{{soup.name}} &#8212; {{soup.price}}</li>
     </ul>
+    {% endif %}
     <hr />
     <div id="menulink">
       <a href="/menu">View <span class="minor">the</span> Menu</a>
@@ -96,7 +98,7 @@
       {% for post in posts %}
       <li class="hentry">
         <h3 class="entry-title"><a href="{{ post.link }}">{{ post.title }}</a></h3>
-        <p><abbr title="{{ post.published }}" class="published">{{ post.published }}</abbr></p>
+        <p><abbr title="{{ post.published }}" class="published">{{ post.published_human }}</abbr></p>
         <div class="entry-content">
           {{ post.content }}
         </div>

@@ -2,12 +2,25 @@
 
 from django.shortcuts import render_to_response
 from google.appengine.ext import db
-from stoutsd.stout.models import MenuCategory, SoupOfTheDay
+from stoutsd.stout.models import MenuCategory, SoupOfTheDay, Post
 
 def home(request):
     sotd = SoupOfTheDay.today()
+    posts = Post.recent()
     return render_to_response('home.html', dict(
-            soup=sotd))
+            posts=posts, soup=sotd))
+
+def home(request):
+    posts = Post.all()
+    return render_to_response('archives.html', dict(
+            posts=posts))
+
+def post(request, slug=None):
+    post = None
+    if slug is not None:
+        post = Post.gql("WHERE slug = :1", slug).get()
+    return render_to_response('post.html', dict(
+            post=post))
 
 def menu(request):
     col1 = [MenuCategory.get_by_key_name("starters"),

@@ -1,11 +1,16 @@
-{# Copyright (C) 2008 Stout Public House. All Rights Reserved #}
 {% extends "base.html" %}
+{# Copyright (C) 2008 Stout Public House. All Rights Reserved #}
 {% block stylesheets %}
 <link rel="stylesheet" href="/css/admin/screen.css" type="text/css" media="screen, projection" />
 <link rel="stylesheet" href="/css/admin/print.css" type="text/css" media="print" />
 <!--[if IE]>
   <link rel="stylesheet" href="/css/admin/ie.css" type="text/css" media="screen, projection" />
 <![endif]-->
+{% endblock %}
+{% block javascripts %}
+    <script type="text/javascript" src="/js/jquery.metadata.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="/js/admin.js"></script>
 {% endblock %}
 {% block header %}
 <div class="span-20">

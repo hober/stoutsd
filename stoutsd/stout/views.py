@@ -1,14 +1,20 @@
 from django.shortcuts import render_to_response
 from google.appengine.ext import db
-from stoutsd.stout.models import Post
+from stoutsd.stout.models import MenuCategory, SoupOfTheDay
 
 def home(request):
-    Post.get_or_insert('hello', title="Hello, world", content="""
-This is a test of the emergency broadcast system.
-
-This is only a test.
-""", published=db.DateTimeProperty.now())
-    return render_to_response('home.html', dict(posts=Post.all()))
+    sotd = SoupOfTheDay.today()
+    return render_to_response('home.html', dict(
+            soup=sotd))
 
 def menu(request):
-    return render_to_response('menu.html', dict(posts=Post.all()))
+    col1 = [MenuCategory.get_by_key_name("starters"),
+            MenuCategory.get_by_key_name("soups"),
+            MenuCategory.get_by_key_name("salads")]
+    col2 = [MenuCategory.get_by_key_name("sandwiches"),
+            MenuCategory.get_by_key_name("pub-grub")]
+    col3 = [MenuCategory.get_by_key_name("main-course"),
+            MenuCategory.get_by_key_name("sides"),
+            MenuCategory.get_by_key_name("desserts")]
+    return render_to_response('menu.html', dict(
+            column_1=col1, column_2=col2, column_3=col3))

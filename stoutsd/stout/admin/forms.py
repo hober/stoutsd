@@ -1,6 +1,6 @@
 from django import newforms as forms
 from google.appengine.ext import db
-from stoutsd.stout.models import MenuCategory
+from stoutsd.stout.models import MenuCategory, MenuItem
 
 class MenuItemForm(forms.Form):
     category = forms.ChoiceField(
@@ -18,5 +18,17 @@ class MenuItemForm(forms.Form):
         return name
 
 class MenuCategoryForm(forms.Form):
+    key = forms.CharField(required=True)
     name = forms.CharField(required=True)
     description = forms.CharField(required=False)
+
+class SoupOfTheDayForm(forms.Form):
+    MenuItem.all()
+    soup_choices = MenuItem.soup_choices()
+    monday = forms.ChoiceField(required=True, choices=soup_choices)
+    tuesday = forms.ChoiceField(required=True, choices=soup_choices)
+    wednesday = forms.ChoiceField(required=True, choices=soup_choices)
+    thursday = forms.ChoiceField(required=True, choices=soup_choices)
+    friday = forms.ChoiceField(required=True, choices=soup_choices)
+    saturday = forms.ChoiceField(required=True, choices=soup_choices)
+    sunday = forms.ChoiceField(required=True, choices=soup_choices)

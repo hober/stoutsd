@@ -1,9 +1,17 @@
+import calendar
+import os
+
+import yaml
+
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
+
 from google.appengine.api import users
 from google.appengine.ext import db
-from stoutsd.stout.models import MenuItem, MenuCategory
-from stoutsd.stout.admin.forms import MenuItemForm, MenuCategoryForm
+
+from stoutsd.stout.models import MenuItem, MenuCategory, SoupOfTheDay
+from stoutsd.stout.admin.forms import MenuItemForm, MenuCategoryForm, \
+    SoupOfTheDayForm
 
 ADMINS=['hober0@gmail.com']
 def adminonly(url):
@@ -24,10 +32,47 @@ def render_admin_template(tmpl, context):
     context['logout'] = users.create_logout_url("/")
     return render_to_response(tmpl, context)
 
+@adminonly('/admin/init')
+def init (request):
+    """"""
+    pass
+
 @adminonly('/admin')
 def dashboard(request):
     return render_admin_template('admin/dashboard.html', dict())
 
+@adminonly('/admin/load-fixtures')
+def load_fixtures(request):
+    fixtures = yaml.load(open(os.path.dirname(__file__) + '/../../fixtures.yaml', 'r'))
+
+    menu_categories = fixtures['MenuCategory']
+    menu_items = fixtures['MenuItem']
+
+    categories_by_key = dict()
+
+    for category in menu_categories:
+        key = category['key']
+        name = category.get('name', None)
+        description = category.get('description', None)
+        cat = MenuCategory(key_name=key, name=name,
+                           description=description)
+        cat.put()
+        categories_by_key[key] = cat
+
+    items = []
+    for item in menu_items:
+        category = categories_by_key[item['category']]
+        name = item.get('name', None)
+        price = str(item.get('price', None))
+        description = item.get('description', None)
+        item = MenuItem(category=category, name=name, price=price, description=description,
+                        show_on_menu=True)
+        item.put()
+        items.append(item)
+
+    return render_admin_template('admin/fixtures.html', dict(
+            menu_items=items,
+            menu_categories=categories_by_key.values()))
 
 @adminonly('/admin/menu')
 def menu(request):
@@ -38,7 +83,8 @@ def menu_categories(request):
     if request.method == 'POST':
         form = MenuCategoryForm(request.POST)
         if form.is_valid():
-            cat = MenuCategory(name=form.clean_data['name'],
+            cat = MenuCategory(key_name=form.clean_data['key'],
+                               name=form.clean_data['name'],
                                description=form.clean_data['description'])
             cat.put()
     else:
@@ -72,3 +118,18 @@ def menu_items(request):
     return render_admin_template('admin/menu/items.html', dict(
             items=items,
             new_item_form=form))
+
+@adminonly('/admin/menu/soups')
+def soup_of_the_day(request):
+    if request.method == 'POST':
+        form = SoupOfTheDayForm(request.POST)
+        if form.is_valid():
+            for day in xrange(len(calendar.day_name)):
+                name = calendar.day_name[day]
+                soup = MenuItem.get(form.clean_data[name.lower()])
+                SoupOfTheDay.set_day(day, soup)
+    else:
+        form=SoupOfTheDayForm()
+
+    return render_admin_template('admin/menu/soups.html', dict(
+            soup_of_the_day_form=form))

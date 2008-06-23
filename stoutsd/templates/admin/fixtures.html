@@ -1,0 +1,31 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Stout Public House &#8212; reloading fixtures{% endblock %}
+
+{% block adminheader %}
+<h1>Stout Public House &#8212; reloading fixtures</h1>
+{% endblock %}
+
+{% block content %}
+<h2>Menu Categories</h2>
+<ul>
+{% for cat in menu_categories %}
+<li>
+  Name: {{cat.name}} <br />
+  Description: {{cat.description}} <br />
+</li>
+{% endfor%}
+</ul>
+
+<h2>Menu Items</h2>
+<ul>
+{% for item in menu_items %}
+<li>
+  Name: {{item.name}} <br />
+  Category: {{item.category.name}} <br />
+  Price: {{item.price}} <br />
+  Description: {{item.description}} <br />
+</li>
+{% endfor%}
+</ul>
+{% endblock %}

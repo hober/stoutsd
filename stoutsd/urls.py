@@ -1,15 +1,17 @@
 from django.conf.urls.defaults import patterns
 
+# Administrative interface
 urlpatterns = patterns('stoutsd.stout.admin.views',
-    # Administrative interface
-    (r'^admin/menu/categories?$', 'menu_categories'),
-    (r'^admin/menu/items?$', 'menu_items'),
-    (r'^admin/menu/?$', 'menu_dashboard'),
+    (r'^admin/menu/categories/?$', 'menu_categories'),
+    (r'^admin/menu/items/?$', 'menu_items'),
+    (r'^admin/menu/soups/?$', 'soup_of_the_day'),
+    (r'^admin/menu/?$', 'menu'),
+    (r'^admin/load-fixtures/?$', 'load_fixtures'),
     (r'^admin/?$', 'dashboard'),
 )
 
+# Public-facing pages
 urlpatterns += patterns('stoutsd.stout.views',
-    # Public-facing pages
     (r'^menu/?$', 'menu'),
     (r'^$', 'home'),
 )

@@ -1,6 +1,21 @@
 import os
+ROOT_URLCONF = 'stoutsd.urls'
 
-# Django settings for stoutsd project.
+MIDDLEWARE_CLASSES = (
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.doc.XViewMiddleware',
+    )
+
+INSTALLED_APPS = (
+    'django.contrib.contenttypes',
+    'django.contrib.sites',
+    'stoutsd.stout'
+)
+
+ROOT_PATH = os.path.dirname(__file__)
+TEMPLATE_DIRS = (
+    ROOT_PATH + '/templates',
+)
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -23,7 +38,7 @@ DATABASE_PORT = ''             # Set to empty string for default. Not used with 
 # although not all variations may be possible on all operating systems.
 # If running in a Windows environment this must be set to the same as your
 # system time zone.
-TIME_ZONE = 'America/Chicago'
+TIME_ZONE = 'America/Los_Angeles'
 
 # Language code for this installation. All choices can be found here:
 # http://www.w3.org/TR/REC-html40/struct/dirlang.html#langcodes
@@ -57,20 +72,4 @@ TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.load_template_source',
     'django.template.loaders.app_directories.load_template_source',
 #     'django.template.loaders.eggs.load_template_source',
-)
-
-MIDDLEWARE_CLASSES = ()
-
-ROOT_URLCONF = 'stoutsd.urls'
-
-ROOT_PATH = os.path.dirname(__file__)
-TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
-    ROOT_PATH + '/templates',
-)
-
-INSTALLED_APPS = (
-    'stoutsd.stout'
 )

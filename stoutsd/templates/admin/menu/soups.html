@@ -1,0 +1,17 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Stout Public House menu editor{% endblock %}
+
+{% block adminheader %}
+<h1>Stout Public House &#8212; Soup of the Day</h1>
+{% endblock %}
+
+{% block content %}
+
+<h2>Soups of the Day</h2>
+<form action="/admin/menu/soups/" method="POST">
+  {{ soup_of_the_day_form.as_p }}
+  <p><input type="submit" value="Submit" /></p>
+</form>
+
+{% endblock %}

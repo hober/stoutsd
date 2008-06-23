@@ -3,172 +3,73 @@
 {% block content %}
 <div id="menu" class="span-24">
   <div class="span-7 append-1">
-    <h2>Starters</h2>
+    {% for category in column_1 %}
+    <h2>{{category.name}}</h2>
+    {% if category.description %}
+    <p class="minor">
+      {{category.description}}
+    </p>
+    {% endif %}
+    {% if category.items %}
     <ul class="nobullets noindent">
+    {% for item in category.items %}
       <li>
-        <strong class="name">South Asian Chicken Skewers</strong>
-        <span class="price">7</span>
-        <span class="description">Served with house-made plum sauce</span>
+        <strong class="name">{{item.name}}</strong>
+        <span class="price">{{item.price}}</span>
+        {% if item.description %}
+        <span class="description">{{item.description}}</span>
+        {% endif %}
       </li>
-      <li>
-        <strong class="name">Classic Buffalo Wings</strong>
-        <span class="price">7</span>
-        <span class="description">Creamy blue cheese, celery, carrots</span>
-      </li>
-      <li>
-        <strong class="name">Chicken Tenders</strong>
-        <span class="price">7</span>
-        <span class="description">Dijon honey mustard dipping sauce</span>
-      </li>
-      <li>
-        <strong class="name">Spicy Thai Chicken Drumettes</strong>
-        <span class="price">7</span>
-        <span class="description">With Chef's blended peanut sauce</span>
-      </li>
-      <li>
-        <strong class="name">Cheese Quesadilla</strong>
-        <span class="price">7</span>
-        <span class="description">Add chicken for 1.50</span>
-      </li>
-      <li>
-        <strong class="name">Mini Angus Beef Burgers</strong>
-        <span class="price">$3<br />each</span>
-        <span class="description">Tasty little sliders with lettuce and tomato</span>
-      </li>
-      <li>
-        <strong class="name">Fried Calamari</strong>
-        <span class="price">9</span>
-        <span class="description">Tender squid, house made marinara</span>
-      </li>
-      <li>
-        <strong class="name">Mussels</strong>
-        <span class="price">9.5</span>
-        <span class="description">Fresh tomato, spices, white wine sauce</span>
-      </li>
-      <li>
-        <strong class="name">East Coast Crab Cakes</strong>
-        <span class="price">15</span>
-        <span class="description">Tender crab meat topped with saffron
-        aioli on a bed of field greens</span>
-      </li>
-      <li>
-        <strong class="name">Crab Stuffed Mushrooms</strong>
-        <span class="price">12</span>
-        <span class="description">Succulent crab meat in a Brandy sauce</span>
-      </li>
+    {% endfor %}
     </ul>
-    <h2>Stout Soups &amp; Salads</h2>
-    <ul class="nobullets noindent">
-      <li>
-        <strong class="name">Gourmet Soups</strong>
-        <span class="price">3 Cup<br />6 Bowl</span>
-        <span class="description">House made fresh daily</span>
-      </li>
-      <li>
-        <strong class="name">Mixed Green Salad</strong>
-        <span class="price">4.5</span>
-        <span class="description">Choice of house made dressing</span>
-      </li>
-      <li>
-        <strong class="name">Stout Salad</strong>
-        <span class="price">8</span>
-        <span class="description">Field greens, candied walnuts, pears
-        and goat cheese. House made balsamic dressing</span>
-      </li>
-      <li>
-        <strong class="name">Classic Ceasar Salad</strong>
-        <span class="price">6</span>
-        <span class="description">Crisp Romaine lettuce, crunchy
-        croutons, Parmigiano cheese. Add chicken 1.50</span>
-      </li>
-      <li>
-        <strong class="name">Grilled Teriyaki Salmon</strong>
-        <span class="price">12</span>
-        <span class="description">Spring Mix, cucumbers, mushrooms and
-        cherry tomatoes</span>
-      </li>
-    </ul>
+    {% endif %}
+    {% endfor %}
   </div>
   <div class="span-7 append-1">
-    <h2>Burgers and Sandwiches</h2>
+    {% for category in column_2 %}
+    <h2>{{category.name}}</h2>
+    {% if category.description %}
     <p class="minor">
-      Add sautéed mushrooms, cheese, sliced avocado, bacon for $.75
-      each<br />
-      Served with French fries
+      {{category.description}}
     </p>
+    {% endif %}
+    {% if category.items %}
     <ul class="nobullets noindent">
+    {% for item in category.items %}
       <li>
-        <strong class="name">Angus Beef Burger</strong>
-        <span class="price">7.5</span>
-        <span class="description">Juicy half pound burger with lettuce,
-        tomato, onions</span>
+        <strong class="name">{{item.name}}</strong>
+        <span class="price">{{item.price}}</span>
+        {% if item.description %}
+        <span class="description">{{item.description}}</span>
+        {% endif %}
       </li>
-      <li>
-        <strong class="name">House Made Veggie Burger</strong>
-        <span class="price">7</span>
-      </li>
-      <li>
-        <strong class="name">Grilled Chicken Sandwich</strong>
-        <span class="price">7.5</span>
-        <span class="description">Tender chicken breast on house baked
-        ciabatta</span>
-      </li>
-      <li>
-        <strong class="name">Stout Tuna Melt</strong>
-        <span class="price">7</span>
-        <span class="description">House baked ciabatta bread, melted
-        cheddar jack</span>
-      </li>
-      <li>
-        <strong class="name">Turkey Avocado Wrap</strong>
-        <span class="price">7.5</span>
-        <span class="description">Turkey, bacon, lettuce, tomato and avocado</span>
-      </li>
-      <li>
-        <strong class="name">Angus Beef Burger</strong>
-        <span class="price">7.5</span>
-        <span class="description">Juicy half pound burger with lettuce,
-        tomato, onions</span>
-      </li>
-      <li>
-        <strong class="name">Angus Beef Burger</strong>
-        <span class="price">7.5</span>
-        <span class="description">Juicy half pound burger with lettuce,
-        tomato, onions</span>
-      </li>
-      <li>
-        <strong class="name">Angus Beef Burger</strong>
-        <span class="price">7.5</span>
-        <span class="description">Juicy half pound burger with lettuce,
-        tomato, onions</span>
-      </li>
-      <li>
-        <strong class="name">Angus Beef Burger</strong>
-        <span class="price">7.5</span>
-        <span class="description">Juicy half pound burger with lettuce,
-        tomato, onions</span>
-      </li>
-      <li>
-        <strong class="name">Angus Beef Burger</strong>
-        <span class="price">7.5</span>
-        <span class="description">Juicy half pound burger with lettuce,
-        tomato, onions</span>
-      </li>
+    {% endfor %}
     </ul>
-    <h2>Irish Pub Fare</h2>
-    <ul class="nobullets noindent">
-    </ul>
+    {% endif %}
+    {% endfor %}
   </div>
   <div class="span-8 last">
-    <h2>Main Events</h2>
+    {% for category in column_3 %}
+    <h2>{{category.name}}</h2>
+    {% if category.description %}
+    <p class="minor">
+      {{category.description}}
+    </p>
+    {% endif %}
+    {% if category.items %}
     <ul class="nobullets noindent">
+    {% for item in category.items %}
+      <li>
+        <strong class="name">{{item.name}}</strong>
+        <span class="price">{{item.price}}</span>
+        {% if item.description %}
+        <span class="description">{{item.description}}</span>
+        {% endif %}
+      </li>
+    {% endfor %}
     </ul>
-    <h2>Sides and such</h2>
-    <ul class="nobullets noindent">
-    </ul>
-    <h2>Desserts</h2>
-    <ul class="nobullets noindent">
-    </ul>
+    {% endif %}
+    {% endfor %}
   </div>
 </div>
 {% endblock %}

@@ -1,0 +1,248 @@
+MenuCategory:
+- name: Starters
+  key: starters
+
+- name: Stout Soups
+  key: soups
+
+- name: Stout Salads
+  key: salads
+
+- name: Burgers and Sandwiches
+  description: Add sautéed mushrooms, cheese, sliced avocado, bacon for $.75 each. Served with French fries.
+  key: sandwiches
+
+- name: Irish Pub Fare
+  key: pub-grub
+
+- name: Main Events
+  key: main-course
+
+- name: Sides and Such
+  key: sides
+
+- name: Desserts
+  key: desserts
+  description: House made. Ask server for daily choice
+
+MenuItem:
+- category: starters
+  name: South Asian Chicken Skewers
+  price: 7
+  description: Served with house made plum sauce
+
+- category: starters
+  name: Classic Buffalo Wings
+  price: 7
+  description: Creamy blue cheese, celery, carrots
+
+- category: starters
+  name: Chicken Tenders
+  price: 7
+  description: Dijon honey mustard dipping sauce
+
+- category: starters
+  name: Spicy Thai Chicken Drumettes
+  price: 7
+  description: With Chef's blended peanut sauce
+
+- category: starters
+  name: Cheese Quesadilla
+  price: 7
+  description: Add chicken for 1.50
+
+- category: starters
+  name: Mini Angus Beef Burgers
+  price: $3 each
+  description: Tasty little sliders with lettuce and tomato
+
+- category: starters
+  name: Fried Calamari
+  price: 9
+  description: Tender squid, house made marinara
+
+- category: starters
+  name: Mussels
+  price: 9.5
+  description: Fresh tomato, spices, white wine sauce
+
+- category: starters
+  name: East Coast Crab Cakes
+  price: 15
+  description: Tender crab meat topped with saffron aioli on a bed of field greens
+
+- category: starters
+  name: Crab Stuffed Mushrooms
+  price: 12
+  description: Succulent crab meat in a Brandy sauce
+
+- category: soups
+  name: Gourmet Soups
+  price: 3 Cup 6 Bowl
+  description: House made fresh daily
+
+- category: salads
+  name: Mixed Green Salad
+  price: 4.5
+  description: Choice of house made dressing
+
+- category: salads
+  name: Stout Salad
+  price: 8
+  description: Field greens, candied walnuts, pears and goat cheese. House made balsamic dressing
+
+- category: salads
+  name: Classic Ceasar Salad
+  price: 6
+  description: Crisp Romaine lettuce, crunchy croutons, Parmigiano cheese. Add chicken 1.50
+
+- category: salads
+  name: Grilled Teriyaki Salmon
+  price: 12
+  description: Spring Mix, cucumbers, mushrooms and cherry tomatoes
+
+- category: sandwiches
+  name: Angus Beef Burger
+  price: 7.5
+  description: Juicy half pound burger with lettuce, tomato, onions
+
+- category: sandwiches
+  name: House Made Veggie Burger
+  price: 7
+
+- category: sandwiches
+  name: Grilled Chicken Sandwich
+  price: 7.5
+  description: Tender chicken breast on house baked ciabatta
+
+- category: sandwiches
+  name: Stout Tuna Melt
+  price: 7
+  description: House baked ciabatta bread, melted cheddar jack
+
+- category: sandwiches
+  name: Turkey Avocado Wrap
+  price: 7.5
+  description: Turkey, bacon, lettuce, tomato and avocado.
+
+- category: sandwiches
+  name: Very Veggie Wrap
+  price: 7
+  description: Grilled veggies drizzled with a balsamic reduction
+
+- category: sandwiches
+  name: Classic Club Sandwich
+  price: 7.5
+  description: Turkey, ham, bacon, lettuce, tomato, mayo. Multigrain bread
+
+- category: sandwiches
+  name: Rueben Sandwich
+  price: 8.5
+  description: Lean corned beef, swiss, sauerkraut on grilled sourdough
+
+- category: sandwiches
+  name: Sliced Top Sirloin Sandwich
+  price: 10
+  description: Marinated and grilled, bell peppers, mushrooms, onions on house made ciabatta bread
+
+- category: sandwiches
+  name: Fresh Grilled Salmon Sandwich
+  price: 10
+  description: Spring mix, grilled onions with balsamic reduction dressing on house made ciabatta bread
+
+- category: pub-grub
+  name: Chicken Pot Pie
+  price: 9.5
+  description: Light puff pastry with chicken and veggies
+
+- category: pub-grub
+  name: Shepherd's Pie
+  price: 9.5
+  description: Traditional hearty combo of ground beef, lamb, carrots topped with house made mashers, lightly browned cheese
+
+- category: pub-grub
+  name: Fish and Chips
+  price: 9.5
+  description: Beer battered cod filets lightly fried and perfectly crispy
+
+- category: pub-grub
+  name: Beef and Guinness Stew
+  price: 9.5
+  description: Tender cubed sirloin, potatoes, carrots in Guinness Stout
+
+- category: pub-grub
+  name: Corned Beef and Cabbage
+  price: 9.5
+  description: A traditional favorite
+
+- category: pub-grub
+  name: All Day Irish Breakfast
+  price: 12.5
+  description: 2 eggs, Irish sausages, rashers, black and white pudding, baked beans, chips and house made Irish soda bread
+
+- category: main-course
+  name: Roasted Chicken
+  price: 13
+  description: Juicy half chicken with whiskey mustard, or crispy herb seasoning. Rosemary potatoes, veggies
+
+- category: main-course
+  name: Wild Mushroom Chicken
+  price: 11.5
+  description: Succulent breast with wild mushrooms in marsala wine sauce
+
+- category: main-course
+  name: Pasta Primavera
+  price: 10
+  description: Fresh veggies, homemade fettuccine in a light tomato sauce. Chicken $2 Salmon or shrimp $5
+
+- category: main-course
+  name: Chicken Penne Pasta
+  price: 10
+  description: Chicken, chorizo, and shitake mushrooms in a delicate cream sauce
+
+- category: main-course
+  name: Seafood Linguine
+  price: 16
+  description: Scallops, clams over homemade linguine in a white wine sauce
+
+- category: main-course
+  name: Garlic Shrimp
+  price: 15
+  description: Jumbo shrimp in a lemon, white wine sauce
+
+- category: main-course
+  name: Pistachio Dusted Wild Salmon
+  price: 16.5
+  description: With seasonal veggies and potato crepe
+
+- category: main-course
+  name: Grilled Pork Chop
+  price: 14
+  description: Sautéed veggies, mash and house made granny smith apple sauce
+
+- category: main-course
+  name: 10 oz. Top Sirloin Steak
+  price: 10.5
+
+- category: main-course
+  name: NY Steak
+  price: 18
+  description: Juicy 14 oz. steak grilled to perfection, topped with shitake mushrooms
+
+- category: main-course
+  name: 14 oz. Ribeye Steak
+  price: 18.5
+  description: Grilled to order, pinot noir reduction
+
+- category: sides
+  name: French Fries
+  price: 3
+
+- category: sides
+  name: Mashed Potatoes
+  price: 3
+
+- category: sides
+  name: Stout Grilled Corn on the Cob
+  price: 4
+  description: Served Mexican style

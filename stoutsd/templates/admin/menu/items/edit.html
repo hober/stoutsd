@@ -1,0 +1,18 @@
+{% extends "admin/base.html" %}
+{# Copyright (C) 2008 Stout Public House. All Rights Reserved #}
+
+{% block title %}Stout Public House menu editor{% endblock %}
+
+{% block adminheader %}
+<h1>Stout Public House &#8212; Menu editor</h1>
+{% endblock %}
+
+{% block content %}
+
+<h2>New Menu item</h2>
+<form action="/admin/menu/items/" method="POST">
+  {{ new_item_form.as_p }}
+  <p><input type="submit" value="Submit" /></p>
+</form>
+
+{% endblock %}

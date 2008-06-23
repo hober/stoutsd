@@ -1,0 +1,25 @@
+{% extends "admin/base.html" %}
+{# Copyright (C) 2008 Stout Public House. All Rights Reserved #}
+
+{% block title %}Stout Public House post editor{% endblock %}
+
+{% block adminheader %}
+<h1>Stout Public House &#8212; Post editor</h1>
+{% endblock %}
+
+{% block content %}
+
+<h2>New Post</h2>
+<form action="/admin/posts/{% if post %}edit/{{post.key}}{% else %}new{% endif %}/" method="POST">
+  {{ post_form.as_p }}
+  <p><input type="submit" value="Submit" /></p>
+</form>
+{% if post %}
+<form action="/admin/posts/delete/{{post.key}}/" method="POST">
+  <p>
+    <label for="delete">Delete this post? WARNING: THERE IS NO UNDO.</label>
+    <input type="submit" value="Delete" id="delete" />
+  </p>
+</form>
+{% endif %}
+{% endblock %}

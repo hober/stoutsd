@@ -1,0 +1,31 @@
+{% extends "admin/base.html" %}
+{# Copyright (C) 2008 Stout Public House. All Rights Reserved #}
+
+{% block title %}Stout Public House menu editor{% endblock %}
+
+{% block adminheader %}
+<h1>Stout Public House &#8212; Menu editor</h1>
+{% endblock %}
+
+{% block content %}
+
+<h2>Menu Categories</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for c in categories %}
+    <tr>
+      <td>{{ c.name }}</td>
+      <td>{{ c.description }}</td>
+    </tr>
+  </tbody>
+  {%endfor %}
+</table>
+
+{% endblock %}

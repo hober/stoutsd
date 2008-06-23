@@ -1,0 +1,45 @@
+{% extends "admin/base.html" %}
+{# Copyright (C) 2008 Stout Public House. All Rights Reserved #}
+
+{% block title %}Stout Public House post editor{% endblock %}
+
+{% block adminheader %}
+<h1>Stout Public House &#8212; Post editor</h1>
+{% endblock %}
+
+{% block content %}
+
+<h2>Posts</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Slug</th>
+      <th>Title</th>
+      <th>Content</th>
+      <th>Published</th>
+      <th>Updated</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for p in posts %}
+    <tr>
+      <td>{{ p.slug }}</td>
+      <td>{{ p.title }}</td>
+      <td>{{ p.content }}</td>
+      <td>{{ p.published }}</td>
+      <td>{{ p.updated }}</td>
+      <td>
+        <a href="/admin/posts/edit/{{p.key}}/">Edit</a>
+      </td>
+    </tr>
+  </tbody>
+  {%endfor %}
+</table>
+
+<p>
+  <a href="/admin/posts/new/">Create a new post!</a>
+</p>
+
+{% endblock %}

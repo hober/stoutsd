@@ -18,6 +18,7 @@
       <th>Price</th>
       <th>Category</th>
       <th>Description</th>
+      <th>Display on menu?</th>
     </tr>
   </thead>
   <tbody>
@@ -27,13 +28,14 @@
       <td>{{ i.price }}</td>
       <td>{{ i.category.name }}</td>
       <td>{{ i.description }}</td>
+      <td>{{ i.show_on_menu }}</td>
     </tr>
   </tbody>
   {%endfor %}
 </table>
 
 <h2>New Menu item</h2>
-<form action="/admin/menu/items" method="POST">
+<form action="/admin/menu/items/" method="POST">
   {{ new_item_form.as_p }}
   <p><input type="submit" value="Submit" /></p>
 </form>

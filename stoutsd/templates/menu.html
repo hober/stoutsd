@@ -14,6 +14,7 @@
     {% if category.items %}
     <ul class="nobullets noindent">
     {% for item in category.items %}
+    {% if item.show_on_menu %}
       <li>
         <strong class="name">{{item.name}}</strong>
         <span class="price">{{item.price}}</span>
@@ -21,6 +22,7 @@
         <span class="description">{{item.description}}</span>
         {% endif %}
       </li>
+    {% endif %}
     {% endfor %}
     </ul>
     {% endif %}
@@ -37,6 +39,7 @@
     {% if category.items %}
     <ul class="nobullets noindent">
     {% for item in category.items %}
+    {% if item.show_on_menu %}
       <li>
         <strong class="name">{{item.name}}</strong>
         <span class="price">{{item.price}}</span>
@@ -44,6 +47,7 @@
         <span class="description">{{item.description}}</span>
         {% endif %}
       </li>
+    {% endif %}
     {% endfor %}
     </ul>
     {% endif %}
@@ -60,6 +64,7 @@
     {% if category.items %}
     <ul class="nobullets noindent">
     {% for item in category.items %}
+    {% if item.show_on_menu %}
       <li>
         <strong class="name">{{item.name}}</strong>
         <span class="price">{{item.price}}</span>
@@ -67,6 +72,7 @@
         <span class="description">{{item.description}}</span>
         {% endif %}
       </li>
+    {% endif %}
     {% endfor %}
     </ul>
     {% endif %}

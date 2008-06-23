@@ -6,11 +6,12 @@ from stoutsd.stout.models import MenuCategory, MenuItem
 
 class MenuItemForm(forms.Form):
     category = forms.ChoiceField(
-        choices=[(c.name, c.name) for c in MenuCategory.all()],
+        choices=[(c.key(), c.name) for c in MenuCategory.all()],
         required=True)
     name = forms.CharField(required=True)
     price = forms.CharField(required=True)
     description = forms.CharField()
+    display_on_menu = forms.BooleanField()
 
     def clean_name(self):
         name = self.clean_data.get('name', '')

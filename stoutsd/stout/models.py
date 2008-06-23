@@ -33,7 +33,7 @@ class MenuItem(db.Model):
     name = db.StringProperty(multiline=False)
     price = db.StringProperty(multiline=False)
     description = db.StringProperty(multiline=False)
-    show_on_menu = db.BooleanProperty()
+    show_on_menu = db.BooleanProperty(default=True)
 
     @staticmethod
     def soup_choices():

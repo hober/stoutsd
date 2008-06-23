@@ -54,8 +54,8 @@ def load_fixtures(request):
 
     for category in menu_categories:
         key = category['key']
-        name = category.get('name', None)
-        description = category.get('description', None)
+        name = category.get('name', '')
+        description = category.get('description', '')
         cat = MenuCategory(key_name=key, name=name,
                            description=description)
         cat.put()
@@ -67,8 +67,9 @@ def load_fixtures(request):
         name = item.get('name', None)
         price = str(item.get('price', None))
         description = item.get('description', None)
+        show_on_menu = item.get('show_on_menu', False)
         item = MenuItem(category=category, name=name, price=price, description=description,
-                        show_on_menu=True)
+                        show_on_menu=show_on_menu)
         item.put()
         items.append(item)
 
@@ -103,14 +104,14 @@ def menu_items(request):
     if request.method == 'POST':
         form = MenuItemForm(request.POST)
         if form.is_valid():
-            cat_name = form.clean_data['category']
+            cat_key = form.clean_data['category']
+            cat = MenuCategory.get(cat_key)
 
-            cats = db.GqlQuery("SELECT * FROM MenuCategory WHERE name = :1", cat_name)
-
-            item = MenuItem(category=cats[0],
+            item = MenuItem(category=cat,
                             name=form.clean_data['name'],
                             price=form.clean_data['price'],
-                            description=form.clean_data['description'])
+                            description=form.clean_data['description'],
+                            show_on_menu=form.clean_data['display_on_menu'])
             item.put()
     else:
         form=MenuItemForm()

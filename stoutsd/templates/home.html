@@ -76,10 +76,10 @@
     </div>
     <div id="trolley" class="span-7 last">
       <h3>Via Trolley</h3>
-      <p class="trolley">
+      <p>
         <a href="http://transit.511sd.com/Services/Default.aspx"
-           ><span class="orange-line">Orange Line</span> &amp; <span
-           class="blue-line">Blue Line</span></a>
+           class="trolley"><span class="orange-line">Orange Line</span>
+        &amp; <span class="blue-line">Blue Line</span></a>
       </p>
       <p>
         Get off at the 5th Avenue station and walk toward 6th.
@@ -97,15 +97,15 @@
     <ol class="hfeed nobullets noindent">
       {% for post in posts %}
       <li class="hentry">
-        <h3 class="entry-title"><a href="{{ post.link }}">{{ post.title }}</a></h3>
+        <h3 class="entry-title"><a href="{{ post.url }}">{{ post.title }}</a></h3>
         <p><abbr title="{{ post.published }}" class="published">{{ post.published_human }}</abbr></p>
         <div class="entry-content">
-          {{ post.content }}
+          {{ post.content_rendered }}
         </div>
       </li>
       {% endfor %}
     </ol>
-    <p><a>View Archives</a></p>
+    <p><a href="/posts/">View Archives</a></p>
   </div>
   <div id="bottom-right" class="span-16 last">
     <div id="bottom-right-top" class="span-16 last">
@@ -114,16 +114,12 @@
         <ol class="vcalendar nobullets noindent">
           {% for event in events %}
           <li class="vevent">
-            <h3>Beer Tasting</h3>
-            <p>12pm &#8212; May 10th, 2008</p>
-            <p>
-              15 different beers will be available to taste.
-              Appetizers will be served.
-            </p>
+            <h3 class="summary">{{ event.title }}</h3>
+            <p><abbr title="{{ event.dtstart }}" class="dtstart">{{ post.dtstart_human }}</abbr></p>
           </li>
           {% endfor %}
         </ol>
-        <p><a>View all events</a></p>
+        <p><a href="/calendar/">View all events</a></p>
       </div>
       <div id="sports" class="span-8 last">
         <h2>NHL Schedule</h2>

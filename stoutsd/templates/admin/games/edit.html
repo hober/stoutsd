@@ -1,0 +1,25 @@
+{% extends "admin/base.html" %}
+{# Copyright (C) 2008 Stout Public House. All Rights Reserved #}
+
+{% block title %}Stout Public House game editor{% endblock %}
+
+{% block adminheader %}
+<h1>Stout Public House &#8212; Game editor</h1>
+{% endblock %}
+
+{% block content %}
+
+<h2>New Game</h2>
+<form action="/admin/games/{% if game %}edit/{{game.key}}{% else %}new{% endif %}/" method="POST">
+  {{ game_form.as_p }}
+  <p><input type="submit" value="Submit" /></p>
+</form>
+{% if game %}
+<form action="/admin/games/delete/{{game.key}}/" method="POST">
+  <p>
+    <label for="delete">Delete this game? WARNING: THERE IS NO UNDO.</label>
+    <input type="submit" value="Delete" id="delete" />
+  </p>
+</form>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "public.html" %}
+{# Copyright (C) 2008 Stout Public House. All Rights Reserved #}
+{% block pagetitle %}Stout Public House, San Diego, CA{% endblock %}
+{% block content %}
+<div class="hfeed span-24">
+  <h2>Archives</h2>
+  <ol class="nobullets noindent">
+    {% for post in posts %}
+    <li class="hentry">
+      <abbr title="{{ post.published }}" class="published">{{ post.published_date }}</abbr>:
+      <a class="entry-title" href="{{ post.link }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+  </ol>
+</div>
+{% endblock %}

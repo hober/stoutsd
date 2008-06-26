@@ -9,21 +9,41 @@ class RequiredFieldMixin:
     def widget_attrs(self, widget):
         return {'class': 'required'}
 
-class RequiredCharField (RequiredFieldMixin, forms.CharField):
+class RequiredCharField(RequiredFieldMixin, forms.CharField):
     def __init__ (self, *args, **kwargs):
         kwargs['required'] = True
         forms.CharField.__init__(self, *args, **kwargs)
 
-class RequiredChoiceField (RequiredFieldMixin, forms.ChoiceField):
+class RequiredChoiceField(RequiredFieldMixin, forms.ChoiceField):
     def __init__ (self, *args, **kwargs):
         kwargs['required'] = True
         forms.ChoiceField.__init__(self, *args, **kwargs)
 
-class PostForm (forms.Form):
+class GameForm(forms.Form):
+    sport = RequiredChoiceField(choices=[
+            ("MLB","Baseball"),
+            ("NHL","Hockey"),
+            ("NBA","Basketball"),
+            ("NFL","Football"),
+            ("Soccer","Soccer")])
+    team1 = RequiredCharField()
+    team2 = RequiredCharField()
+    dtstart = forms.DateTimeField(required=True)
+
+class PostForm(forms.Form):
     title = RequiredCharField()
     content = RequiredCharField(widget=forms.Textarea)
     publish = forms.BooleanField(required=False)
     key = forms.CharField(required=False, widget=forms.HiddenInput)
+
+class EventForm(forms.Form):
+    title = RequiredCharField()
+    content = RequiredCharField(widget=forms.Textarea)
+    publish = forms.BooleanField(required=False)
+    key = forms.CharField(required=False, widget=forms.HiddenInput)
+    start = forms.DateTimeField(required=True)
+    end = forms.DateTimeField(required=False)
+    all_day = forms.BooleanField(required=False)
 
 class MenuItemForm(forms.Form):
     category = RequiredChoiceField(

@@ -104,6 +104,7 @@ h1.span-16 {
 .trolley {
   font-family: Verdana, "Helvetica Neue", Helvetica, sans;
   font-weight: bold;
+  text-decoration: none;
 }
 
 #hours, #dujour, #footer {

@@ -1,0 +1,43 @@
+{% extends "admin/base.html" %}
+{# Copyright (C) 2008 Stout Public House. All Rights Reserved #}
+
+{% block title %}Stout Public House game editor{% endblock %}
+
+{% block adminheader %}
+<h1>Stout Public House &#8212; Game editor</h1>
+{% endblock %}
+
+{% block content %}
+
+<h2>Games</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Sport</th>
+      <th>Team 1</th>
+      <th>Team 2</th>
+      <th>Start time</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for p in games %}
+    <tr>
+      <td>{{ p.sport }}</td>
+      <td>{{ p.team1 }}</td>
+      <td>{{ p.team2 }}</td>
+      <td>{{ p.dtstart }}</td>
+      <td>
+        <a href="/admin/games/edit/{{p.key}}/">Edit</a>
+      </td>
+    </tr>
+  </tbody>
+  {%endfor %}
+</table>
+
+<p>
+  <a href="/admin/games/new/">Create a new game!</a>
+</p>
+
+{% endblock %}

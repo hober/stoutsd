@@ -22,6 +22,16 @@ urlpatterns = patterns('stoutsd.stout.admin.views',
     (r'^admin/posts/edit/(?P<key>.+)/$', 'edit_post'),
     (r'^admin/posts/$', 'list_posts'),
 
+    (r'^admin/events/new/$', 'edit_event'),
+    (r'^admin/events/delete/(?P<key>.+)/$', 'delete_event'),
+    (r'^admin/events/edit/(?P<key>.+)/$', 'edit_event'),
+    (r'^admin/events/$', 'list_events'),
+
+    (r'^admin/games/new/$', 'edit_game'),
+    (r'^admin/games/delete/(?P<key>.+)/$', 'delete_game'),
+    (r'^admin/games/edit/(?P<key>.+)/$', 'edit_game'),
+    (r'^admin/games/$', 'list_games'),
+
     (r'^admin/load-fixtures/$', 'load_fixtures'),
     (r'^admin/$', 'dashboard'),
 )
@@ -30,6 +40,8 @@ urlpatterns = patterns('stoutsd.stout.admin.views',
 urlpatterns += patterns('stoutsd.stout.views',
     (r'^menu/$', 'menu'),
     (r'^\d+/\d+/(?P<slug>.+)/$', 'post'),
-    (r'^posts/$', 'archvies'),
+    (r'^posts/$', 'archives'),
+    (r'^calendar/$', 'calendar'),
+    (r'^feed/$', 'feed'),
     (r'^$', 'home'),
 )

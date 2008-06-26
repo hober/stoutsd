@@ -12,9 +12,10 @@ from django.shortcuts import render_to_response
 from google.appengine.api import users
 from google.appengine.ext import db
 
-from stoutsd.stout.models import MenuItem, MenuCategory, SoupOfTheDay, Post
+from stoutsd.stout.models import MenuItem, MenuCategory, SoupOfTheDay, \
+    Post, Event, Game
 from stoutsd.stout.admin.forms import MenuItemForm, MenuCategoryForm, \
-    SoupOfTheDayForm, PostForm
+    SoupOfTheDayForm, PostForm, EventForm, GameForm
 
 ADMINS=['hober0@gmail.com']
 def adminonly(url):
@@ -35,11 +36,11 @@ def render_admin_template(tmpl, context):
     context['logout'] = users.create_logout_url("/")
     return render_to_response(tmpl, context)
 
-@adminonly('/admin')
+@adminonly('/admin/')
 def dashboard(request):
     return render_admin_template('admin/dashboard.html', dict())
 
-@adminonly('/admin/load-fixtures')
+@adminonly('/admin/load-fixtures/')
 def load_fixtures(request):
     """Populate the data store with an initial set of data."""
     fixtures = yaml.load(open(os.path.dirname(__file__) + '/../../fixtures.yaml', 'r'))
@@ -74,17 +75,17 @@ def load_fixtures(request):
             menu_items=items,
             menu_categories=categories_by_key.values()))
 
-@adminonly('/admin/menu')
+@adminonly('/admin/menu/')
 def menu(request):
     return render_admin_template('admin/menu/dashboard.html', dict())
 
-@adminonly('/admin/menu/categories')
+@adminonly('/admin/menu/categories/')
 def list_menu_categories(request):
     categories = db.GqlQuery("SELECT * FROM MenuCategory")
     return render_admin_template('admin/menu/categories/list.html', dict(
             categories=categories))
 
-@adminonly('/admin/menu/categories')
+@adminonly('/admin/menu/categories/')
 def edit_menu_category(request, key=None):
     if request.method == 'POST':
         form = MenuCategoryForm(request.POST)
@@ -96,13 +97,13 @@ def edit_menu_category(request, key=None):
     return render_admin_template('admin/menu/categories/edit.html', dict(
             new_category_form=form))
 
-@adminonly('/admin/menu/items')
+@adminonly('/admin/menu/items/')
 def list_menu_items(request):
     items = db.GqlQuery("SELECT * FROM MenuItem")
     return render_admin_template('admin/menu/items/list.html', dict(
             items=items))
 
-@adminonly('/admin/menu/items')
+@adminonly('/admin/menu/items/')
 def edit_menu_item(request, key=None):
     if request.method == 'POST':
         form = MenuItemForm(request.POST)
@@ -115,7 +116,7 @@ def edit_menu_item(request, key=None):
     return render_admin_template('admin/menu/items/edit.html', dict(
             new_item_form=form))
 
-@adminonly('/admin/menu/soups')
+@adminonly('/admin/menu/soups/')
 def soup_of_the_day(request):
     if request.method == 'POST':
         form = SoupOfTheDayForm(request.POST)
@@ -130,13 +131,16 @@ def soup_of_the_day(request):
     return render_admin_template('admin/menu/soups.html', dict(
             soup_of_the_day_form=form))
 
-@adminonly('/admin/posts')
+# Posts
+
+
+@adminonly('/admin/posts/')
 def list_posts(request):
     posts = db.GqlQuery("SELECT * FROM Post")
     return render_admin_template('admin/posts/list.html', dict(
             posts=posts))
 
-@adminonly('/admin/posts/edit')
+@adminonly('/admin/posts/edit/')
 def edit_post(request, key=None):
     post = None
     if key is not None:
@@ -170,3 +174,85 @@ def delete_post(request, key=None):
     if key and request.method == 'POST':
         post.delete()
     return HttpResponseRedirect('/admin/posts/')
+
+# Events
+
+@adminonly('/admin/events/')
+def list_events(request):
+    events = db.GqlQuery("SELECT * FROM Event")
+    return render_admin_template('admin/events/list.html', dict(
+            events=events))
+
+@adminonly('/admin/events/edit/')
+def edit_event(request, key=None):
+    event = None
+    if key is not None:
+        event = Event.get(key)
+    if request.method == 'POST':
+        form = EventForm(request.POST)
+        if form.is_valid():
+            event = Event.from_form(form)
+            event.put()
+            return HttpResponseRedirect('/admin/events/')
+    elif event:
+        form = EventForm({'title': event.title,
+                         'content': event.content,
+                         'publish': (event.published is not None),
+                         # Hidden
+                         'key': event.key(),
+                         'slug': event.slug,
+                         'published': event.published,
+                         'updated': event.updated})
+    else:
+        form = EventForm()
+
+    return render_admin_template('admin/events/edit.html', dict(
+            event=event, event_form=form))
+
+@adminonly('/admin/events/delete/')
+def delete_event(request, key=None):
+    event = None
+    if key is not None:
+        event = Event.get(key)
+    if key and request.method == 'POST':
+        event.delete()
+    return HttpResponseRedirect('/admin/events/')
+
+# Games
+
+@adminonly('/admin/games/')
+def list_games(request):
+    games = db.GqlQuery("SELECT * FROM Game")
+    return render_admin_template('admin/games/list.html', dict(
+            games=games))
+
+@adminonly('/admin/games/edit/')
+def edit_game(request, key=None):
+    game = None
+    if key is not None:
+        game = Game.get(key)
+    if request.method == 'POST':
+        form = GameForm(request.POST)
+        if form.is_valid():
+            game = Game.from_form(form)
+            game.put()
+            return HttpResponseRedirect('/admin/games/')
+    elif game:
+        form = GameForm({'sport': game.sport,
+                         'team1': game.team1,
+                         'team2': game.team2,
+                         'dtstart': game.dtstart})
+    else:
+        form = GameForm()
+
+    return render_admin_template('admin/games/edit.html', dict(
+            game=game, game_form=form))
+
+@adminonly('/admin/games/delete/')
+def delete_game(request, key=None):
+    game = None
+    if key is not None:
+        game = Game.get(key)
+    if key and request.method == 'POST':
+        game.delete()
+    return HttpResponseRedirect('/admin/games/')

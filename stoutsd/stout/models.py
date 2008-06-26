@@ -1,44 +1,134 @@
 # Copyright (C) 2008 Stout Public House. All Rights Reserved
 
-import calendar, datetime
+import calendar
+import datetime
+import markdown
 
 from django.template.defaultfilters import slugify
 
 from google.appengine.ext import db
 
-# class Event(db.Model):
-#     dtstart = db.DateTimeProperty()
-#     dtend = db.DateTimeProperty()
-#     slug = db.StringProperty(multiline=False) # ?
-#     title = db.StringProperty(multiline=False)
-#     content = db.TextProperty()
-#     published = db.DateTimeProperty(auto_now_add=True)
-#     updated = db.DateTimeProperty(auto_now_add=True, auto_now=True)
+HUMAN_DT_FORMAT = "%B %d @ %H:%M"
+HUMAN_DATE_FORMAT = "%B %d, %Y"
+ATOM_DATE_FORMAT = "%Y-%m-%dT%H:%M:%SZ"
 
-class Post(db.Model):
+def date_format_property(field, format):
+    def formatter (self):
+        return field(self).strftime(format)
+    return formatter
+
+class Game(db.Model):
+    sport = db.StringProperty(multiline=False)
+    team1 = db.StringProperty(multiline=False)
+    team2 = db.StringProperty(multiline=False)
+    dtstart = db.DateTimeProperty()
+
+    @staticmethod
+    def from_form(form):
+        if not form.is_valid(): return None
+        return Game(**form.clean_data)
+
+# Methods shared by Event and Post.
+class EntryMixin:
+    published_human = date_format_property(lambda self: self.published,
+                                           HUMAN_DT_FORMAT)
+    updated_human = date_format_property(lambda self: self.updated,
+                                           HUMAN_DT_FORMAT)
+    published_date = date_format_property(lambda self: self.published,
+                                           HUMAN_DATE_FORMAT)
+
+class Event(EntryMixin, db.Model):
     slug = db.StringProperty(multiline=False)
     title = db.StringProperty(multiline=False)
     content = db.TextProperty()
+    content_rendered = db.TextProperty()
     published = db.DateTimeProperty(auto_now_add=True)
     updated = db.DateTimeProperty(auto_now_add=True, auto_now=True)
+    dtstart = db.DateTimeProperty()
+    dtend = db.DateTimeProperty()
+    all_day = db.BooleanProperty()
 
-    def link(self):
-        return '/posts/%d/%d/%s/' % (self.published.year,
-                                     self.published.month,
-                                     self.slug())
+    # FIXME: should be 12pm &#8212; May 10th, 2008
+    dtstart_human = date_format_property(lambda self: self.dtstart,
+                                           HUMAN_DT_FORMAT)
+    dtend_human = date_format_property(lambda self: self.dtend,
+                                           HUMAN_DT_FORMAT)
 
-    def published_human(self):
-        return self.published.strftime("%B %d @ %H:%M")
+    def url(self):
+        return '/events/%04d/%02d/%s/' % (
+            self.published.year, self.published.month, self.slug)
 
     @staticmethod
-    def recent():
-        return Post.gql("ORDER BY updated LIMIT 5")
+    def upcoming(limit=None):
+        today = datetime.date.today()
+        now = datetime.datetime(today.year, today.month, today.day,
+                                0, 0, 0)
+        if limit is not None:
+            limit = " LIMIT %d" % limit
+        else:
+            limit = ""
+        return Event.gql("WHERE dtstart >= :1 ORDER BY dtstart ASC%s" % limit, now)
 
+    # I should really rethink the model<->form relationship.
     @staticmethod
     def from_form(form):
         if not form.is_valid(): return None
         title = form.clean_data['title']
         content = form.clean_data['content']
+        content_rendered = markdown.markdown(content)
+        publish = form.clean_data['publish']
+        dtstart = form.clean_data['start']
+        dtend = form.clean_data['end']
+        all_day = form.clean_data['all_day']
+        # Existing objects only
+        key = form.clean_data['key']
+        # Create/modify the post
+        updated = datetime.datetime.now()
+        if key:
+            existing = Event.get(key)
+            existing.title = title
+            existing.content = content
+            existing.updated = updated
+            if publish:
+                if not existing.published:
+                    existing.published = updated
+            else:
+                existing.published = None
+            return existing
+        else:
+            published = updated if publish else None
+            return Event(slug=slugify(title), title=title, content=content,
+                         content_rendered=content_rendered,
+                         published=published, updated=updated,
+                         dtstart=dtstart, dtend=dtend, all_day=all_day)
+
+class Post(EntryMixin, db.Model):
+    slug = db.StringProperty(multiline=False)
+    title = db.StringProperty(multiline=False)
+    content = db.TextProperty()
+    content_rendered = db.TextProperty()
+    published = db.DateTimeProperty(auto_now_add=True)
+    updated = db.DateTimeProperty(auto_now_add=True, auto_now=True)
+
+    @staticmethod
+    def recent(limit=None):
+        if limit is not None:
+            limit = " LIMIT %d" % limit
+        else:
+            limit = ""
+        return Post.gql("ORDER BY updated%s" % limit)
+
+    def url(self):
+        return '/%04d/%02d/%s/' % (
+            self.published.year, self.published.month, self.slug)
+
+    # I should really rethink the model<->form relationship.
+    @staticmethod
+    def from_form(form):
+        if not form.is_valid(): return None
+        title = form.clean_data['title']
+        content = form.clean_data['content']
+        content_rendered = markdown.markdown(content)
         publish = form.clean_data['publish']
         # Existing objects only
         key = form.clean_data['key']
@@ -58,6 +148,7 @@ class Post(db.Model):
         else:
             published = updated if publish else None
             return Post(slug=slugify(title), title=title, content=content,
+                        content_rendered=content_rendered,
                         published=published, updated=updated)
 
 class MenuCategory(db.Model):
@@ -121,3 +212,45 @@ class SoupOfTheDay(db.Model):
             return sotd.soup
         else:
             return None
+
+class AtomEntry:
+    def __init__(self, wrapped):
+        self.wrapped = wrapped
+
+    def id(self):
+        return "tag:stoutsd.com,%s:%s" % (
+            self.wrapped.published.strftime("%Y-%m-%d"),
+            self.wrapped.slug)
+
+    def url(self):
+        return self.wrapped.url()
+
+    published = date_format_property(lambda self: self.wrapped.published,
+                                     ATOM_DATE_FORMAT)
+    updated = date_format_property(lambda self: self.wrapped.updated,
+                                     ATOM_DATE_FORMAT)
+
+    def title(self):
+        return self.wrapped.title
+
+    def content(self):
+        return self.wrapped.content
+
+    def is_event(self):
+        return hasattr(self.wrapped, 'dtstart')
+
+    def dtstart(self):
+        if self.is_event():
+            return self.wrapped.dtstart.strftime(HUMAN_DT_FORMAT)
+
+class AtomFeed:
+    def __init__(self):
+        self.id = "tag:stoutsd.com,2008:feed"
+        self.alternate = "http://stoutsd.com/"
+        self.url = "http://stoutsd.com/feed/"
+        self.title = "Stout Public House"
+        self.entries = []
+
+    def updated(self):
+        # steal from most recently updated entry
+        pass

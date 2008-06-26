@@ -1,19 +1,37 @@
 # Copyright (C) 2008 Stout Public House. All Rights Reserved
 
+from django.http import HttpResponse
 from django.shortcuts import render_to_response
+from django.template import loader
 from google.appengine.ext import db
-from stoutsd.stout.models import MenuCategory, SoupOfTheDay, Post
+from stoutsd.stout.models import MenuCategory, SoupOfTheDay, Post, \
+    Event, AtomEntry, AtomFeed
 
 def home(request):
     sotd = SoupOfTheDay.today()
-    posts = Post.recent()
+    posts = Post.recent(5)
+    events = Event.upcoming(5)
     return render_to_response('home.html', dict(
-            posts=posts, soup=sotd))
+            posts=posts, events=events, soup=sotd))
 
-def home(request):
+def feed(request):
+    sotd = SoupOfTheDay.today()
+    posts = Post.recent(5)
+    events = Event.upcoming(5)
+    feedobj = AtomFeed()
+    entries = [AtomEntry(p) for p in posts] + [AtomEntry(e) for e in events]
+    return HttpResponse(loader.render_to_string('feed.atom', dict(
+            feed=feedobj, entries=entries)), mimetype="application/atom+xml")
+
+def archives(request):
     posts = Post.all()
     return render_to_response('archives.html', dict(
             posts=posts))
+
+def calendar(request):
+    events = Event.upcoming(5)
+    return render_to_response('calendar.html', dict(
+            events=events))
 
 def post(request, slug=None):
     post = None

@@ -1,15 +1,15 @@
 {% extends "admin/base.html" %}
 {# Copyright (C) 2008 Stout Public House. All Rights Reserved #}
 
-{% block title %}Stout Public House post editor{% endblock %}
+{% block title %}Stout Public House event editor{% endblock %}
 
 {% block adminheader %}
-<h1>Stout Public House &#8212; Post editor</h1>
+<h1>Stout Public House &#8212; Event editor</h1>
 {% endblock %}
 
 {% block content %}
 
-<h2>Posts</h2>
+<h2>Events</h2>
 
 <table>
   <thead>
@@ -19,19 +19,25 @@
       <th>Content</th>
       <th>Published</th>
       <th>Updated</th>
+      <th>Start time</th>
+      <th>End time</th>
+      <th>All day?</th>
       <th>Action</th>
     </tr>
   </thead>
   <tbody>
-    {% for p in posts %}
+    {% for p in events %}
     <tr>
       <td>{{ p.slug }}</td>
       <td><a href="{{ p.url }}">{{ p.title }}</a></td>
       <td>{{ p.content_rendered }}</td>
       <td>{{ p.published_human }}</td>
       <td>{{ p.updated_human }}</td>
+      <td>{{ p.dtstart_human }}</td>
+      <td>{{ p.dtend_human }}</td>
+      <td>{{ p.all_day }}</td>
       <td>
-        <a href="/admin/posts/edit/{{p.key}}/">Edit</a>
+        <a href="/admin/events/edit/{{p.key}}/">Edit</a>
       </td>
     </tr>
   </tbody>
@@ -39,7 +45,7 @@
 </table>
 
 <p>
-  <a href="/admin/posts/new/">Create a new post!</a>
+  <a href="/admin/events/new/">Create a new event!</a>
 </p>
 
 {% endblock %}

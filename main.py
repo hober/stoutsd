@@ -1,7 +1,6 @@
 # Copyright (C) 2008 Stout Public House. All Rights Reserved
 
 import os
-import sys
 
 os.environ['DJANGO_SETTINGS_MODULE'] = 'stoutsd.settings'
 

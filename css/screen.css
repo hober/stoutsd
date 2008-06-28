@@ -126,7 +126,7 @@ ul.nobullets, ol.nobullets {
   border: 8px solid #c7ab83;
 }
 
-p .first {
+#about h3, p .first {
   font-variant: small-caps;
 }
 
@@ -182,4 +182,76 @@ margin: 0 0 1em 0;
 
 #menu h1, #menu h2 {
   font-variant: small-caps;
+}
+
+/* Blog posts */
+
+#blog {
+  font-size: 12px;
+}
+
+.entry-meta {
+  margin-top: -1em;
+  font-style: italic;
+}
+
+abbr.published {
+  border-bottom: none;
+}
+
+.entry-title a {
+  color: #e4d4af;
+  text-decoration: none;
+  font-family: Verdana, "Helvetica Neue", Helvetica, sans;
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+/* Events */
+
+#events {
+  font-size: 12px;
+}
+
+.event-meta {
+  float: right;
+  font-style: italic;
+}
+
+#events .vevent .summary {
+  color: #e4d4af;
+  text-decoration: none;
+  font-family: Verdana, "Helvetica Neue", Helvetica, sans;
+  font-size: 12px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+#contact a {
+  color: #e4d4af;
+  text-decoration: none;
+}
+
+#about hr, #location hr, #blog hr, #events hr, #sports hr, #photos hr,
+#contact hr {
+  color: #d4c49f;
+  background-color: #d4c49f;
+  border-color: #d4c49f;
+  margin: -23px 0 0 0;
+  padding: 0 0 0 0;
+  float: right;
+  clear: none;
+}
+
+#about hr    { width: 67.5%; }
+#location hr { width: 35%; }
+#blog hr     { width: 60%; }
+#events hr   { width: 50%; }
+#sports hr   { width: 60%; }
+#photos hr   { width: 75%; }
+#contact hr  { width: 45%; }
+
+#blog .hfeed, #events .vcalendar, #sports .vcalendar {
+  margin-top: 1.5em;
 }

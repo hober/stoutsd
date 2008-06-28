@@ -47,6 +47,7 @@
 <div id="middle" class="span-24">
   <div id="about" class="span-11 append-1">
     <h2>A Bit About Stout</h2>
+    <hr />
     <p>
       <span class="first">Stout Public House is downtown San
       Diego's neighborhood Irish pub.</span> We feature a quick
@@ -69,6 +70,7 @@
   </div>
   <div id="location" class="span-12 last">
     <h2>Location: <span class="small">1125 6th Avenue, San Diego, CA 92101</span></h2>
+    <hr />
     <div id="map" class="span-5">
       <a href="http://maps.google.com/maps?f=q&amp;hl=en&amp;geocode=&amp;q=1125+6th+Avenue,+San+Diego,+CA+92101&amp;sll=32.746392,-117.153087&amp;sspn=0.007147,0.012252&amp;ie=UTF8&amp;ll=32.719566,-117.159212&amp;spn=0.007149,0.012252&amp;z=16"><img src="/images/map.png" alt="" /></a>
       <br />
@@ -92,13 +94,14 @@
   </div>
 </div>
 <div id="bottom" class="span-24">
-  <div id="blog" class="span-8">
+  <div id="blog" class="span-7 append-1">
     <h2>Recent Posts</h2>
+    <hr />
     <ol class="hfeed nobullets noindent">
       {% for post in posts %}
       <li class="hentry">
         <h3 class="entry-title"><a href="{{ post.url }}">{{ post.title }}</a></h3>
-        <p><abbr title="{{ post.published }}" class="published">{{ post.published_human }}</abbr></p>
+        <p class="entry-meta"><abbr title="{{ post.published }}" class="published">{{ post.published_date }}</abbr></p>
         <div class="entry-content">
           {{ post.content_rendered }}
         </div>
@@ -109,25 +112,26 @@
   </div>
   <div id="bottom-right" class="span-16 last">
     <div id="bottom-right-top" class="span-16 last">
-      <div id="events" class="span-8">
+      <div id="events" class="span-7 append-1">
         <h2>Upcoming Events</h2>
+        <hr />
         <ol class="vcalendar nobullets noindent">
           {% for event in events %}
           <li class="vevent">
+            <div class="event-meta"><abbr title="{{ event.dtstart }}" class="dtstart">{{ event.dtstart_human }}</abbr></div>
             <h3 class="summary">{{ event.title }}</h3>
-            <p><abbr title="{{ event.dtstart }}" class="dtstart">{{ post.dtstart_human }}</abbr></p>
+            <div class="note">
+              {{ event.content_rendered }}
+            </div>
           </li>
           {% endfor %}
         </ol>
         <p><a href="/calendar/">View all events</a></p>
       </div>
       <div id="sports" class="span-8 last">
-        <h2>NHL Schedule</h2>
+        <h2>Sports Schedule</h2>
+        <hr />
         <ol class="vcalendar nobullets noindent">
-          <li class="vevent">
-            <div class="dtstart">Thursday 05/08/08</div>
-            <div class="summary">Dallas vs. Detroit &#8212; 12pm</div>
-          </li>
           <li class="vevent">
             <div class="dtstart">Thursday 05/08/08</div>
             <div class="summary">Dallas vs. Detroit &#8212; 12pm</div>
@@ -138,6 +142,7 @@
     <div id="bottom-right-bottom" class="span-16 last">
       <div id="photos" class="span-12">
         <h2>Recent Photos</h2>
+        <hr />
         <!-- Start of Flickr Badge -->
         <div id="flickr_badge_uber_wrapper"><div id="flickr_badge_wrapper">
           <script type="text/javascript" src="http://www.flickr.com/badge_code_v2.gne?count=8&amp;display=random&amp;size=t&amp;layout=x&amp;source=user_set&amp;user=37699593@N00&amp;set=72157604968715075&amp;context=in%2Fset-72157604968715075%2F"></script>
@@ -146,6 +151,7 @@
       </div>
       <div id="contact" class="span-4 last">
         <h2>Contact us</h2>
+        <hr />
         <p>
           <a href="mailto:mark@stoutsd.com">mark@stoutsd.com</a>
           <a href="mailto:dave@stoutsd.com">dave@stoutsd.com</a>

@@ -24,12 +24,14 @@
     <img id="slideshow" href="/images/stout-main.jpg" alt="Stout Public House" />
   </div>
   <div id="dujour" class="span-8 last">
+    {% if specials %}
     <h2>Daily Specials</h2>
     <ul class="nobullets noindent">
-      <li>Guinness Pot-Pie &#8212; <i class="price">$11.99</i></li>
-      <li>Blackened Cod Filet &#8212; <i class="price">$13.99</i></li>
-      <li>Irish Potato Stew &#8212; <i class="price">$8.99</i></li>
+      {% for special in specials %}
+      <li>{{ special.name }} &#8212; <i class="price">{{ special.price }}</i></li>
+      {% endfor %}
     </ul>
+    {% endif %}
     {% if soup %}
     <hr />
     <h2>Soup <span class="minor">of the</span> Day</h2>
@@ -95,6 +97,7 @@
 </div>
 <div id="bottom" class="span-24">
   <div id="blog" class="span-7 append-1">
+    {% if posts %}
     <h2>Recent Posts</h2>
     <hr />
     <ol class="hfeed nobullets noindent">
@@ -109,10 +112,12 @@
       {% endfor %}
     </ol>
     <p><a href="/posts/">View Archives</a></p>
+    {% endif %}
   </div>
   <div id="bottom-right" class="span-16 last">
     <div id="bottom-right-top" class="span-16 last">
       <div id="events" class="span-7 append-1">
+        {% if events %}
         <h2>Upcoming Events</h2>
         <hr />
         <ol class="vcalendar nobullets noindent">
@@ -127,8 +132,10 @@
           {% endfor %}
         </ol>
         <p><a href="/calendar/">View all events</a></p>
+        {% endif %}
       </div>
       <div id="sports" class="span-8 last">
+        {% if games %}
         <h2>Sports Schedule</h2>
         <hr />
         <ol class="vcalendar nobullets noindent">
@@ -137,6 +144,7 @@
             <div class="summary">Dallas vs. Detroit &#8212; 12pm</div>
           </li>
         </ol>
+        {% endif %}
       </div>
     </div>
     <div id="bottom-right-bottom" class="span-16 last">
@@ -153,10 +161,17 @@
         <h2>Contact us</h2>
         <hr />
         <p>
+          Email us:
+        </p>
+        <p>
           <a href="mailto:mark@stoutsd.com">mark@stoutsd.com</a>
           <a href="mailto:dave@stoutsd.com">dave@stoutsd.com</a>
           <a href="mailto:info@stoutsd.com">info@stoutsd.com</a>
           <a href="mailto:events@stoutsd.com">events@stoutsd.com</a>
+        </p>
+        <p>
+          Or friend us on <a
+          href="http://www.myspace.com/stoutpub">MySpace</a>.
         </p>
       </div>
     </div>

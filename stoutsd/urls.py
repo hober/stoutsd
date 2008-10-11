@@ -32,6 +32,7 @@ urlpatterns = patterns('stoutsd.stout.admin.views',
     (r'^admin/games/edit/(?P<key>.+)/$', 'edit_game'),
     (r'^admin/games/$', 'list_games'),
 
+    (r'^admin/load-nhl/$', 'load_nhl'),
     (r'^admin/load-fixtures/$', 'load_fixtures'),
     (r'^admin/$', 'dashboard'),
 )

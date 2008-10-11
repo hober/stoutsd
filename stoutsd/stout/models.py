@@ -8,9 +8,14 @@ from django.template.defaultfilters import slugify
 
 from google.appengine.ext import db
 
+from stoutsd.utils import pacific_time
+
 HUMAN_DT_FORMAT = "%B %d @ %H:%M"
 HUMAN_DATE_FORMAT = "%B %d, %Y"
 ATOM_DATE_FORMAT = "%Y-%m-%dT%H:%M:%SZ"
+
+SHORT_DATE_FORMAT = "%A %m/%d/%y"
+SHORT_TIME_FORMAT = "%H:%M"
 
 def date_format_property(field, format):
     def formatter (self):
@@ -23,10 +28,22 @@ class Game(db.Model):
     team2 = db.StringProperty(multiline=False)
     dtstart = db.DateTimeProperty()
 
+    def date_human(self):
+        return self.dtstart.replace(tzinfo=pacific_time).strftime(SHORT_DATE_FORMAT)
+
+    def time_human(self):
+        return self.dtstart.replace(tzinfo=pacific_time).strftime(SHORT_TIME_FORMAT)
+
     @staticmethod
     def from_form(form):
         if not form.is_valid(): return None
         return Game(**form.clean_data)
+
+    @staticmethod
+    def today():
+        today = datetime.date.today()
+        tomorrow = datetime.date.today() + datetime.timedelta(days=1)
+        return Game.gql("WHERE dtstart >= :1 AND dtstart < :2 ORDER BY dtstart ASC", today, tomorrow)
 
 # Methods shared by Event and Post.
 class EntryMixin:

@@ -5,14 +5,15 @@ from django.shortcuts import render_to_response
 from django.template import loader
 from google.appengine.ext import db
 from stoutsd.stout.models import MenuCategory, SoupOfTheDay, Post, \
-    Event, AtomEntry, AtomFeed
+    Event, Game, AtomEntry, AtomFeed
 
 def home(request):
     sotd = SoupOfTheDay.today()
     posts = Post.recent(5)
     events = Event.upcoming(5)
+    games = Game.today()
     return render_to_response('home.html', dict(
-            posts=posts, events=events, soup=sotd))
+            posts=posts, events=events, soup=sotd, games=games))
 
 def feed(request):
     sotd = SoupOfTheDay.today()

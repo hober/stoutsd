@@ -24,3 +24,7 @@ TAGS: js/admin.js js/stout.js main.py stoutsd/__init__.py \
       stoutsd/stout/admin/forms.py stoutsd/stout/admin/views.py \
       stoutsd/stout/models.py stoutsd/stout/views.py stoutsd/urls.py
 	find . -name \*.py -or -name \*.js | etags -
+
+deploy:
+	@/usr/bin/python /usr/local/bin/appcfg.py --no_cookies \
+		--email=hober0@gmail.com --passin update .

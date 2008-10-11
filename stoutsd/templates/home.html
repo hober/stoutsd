@@ -139,10 +139,12 @@
         <h2>Sports Schedule</h2>
         <hr />
         <ol class="vcalendar nobullets noindent">
+          {% for game in games %}
           <li class="vevent">
-            <div class="dtstart">Thursday 05/08/08</div>
-            <div class="summary">Dallas vs. Detroit &#8212; 12pm</div>
+            <div class="dtstart">{{ game.date_human }}</div>
+            <div class="summary">{{ game.team1 }} vs. {{ game.team2 }} &#8212; {{game.time_human}}</div>
           </li>
+          {% endfor %}
         </ol>
         {% endif %}
       </div>

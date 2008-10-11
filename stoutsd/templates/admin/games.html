@@ -1,0 +1,21 @@
+{% extends "admin/base.html" %}
+{# Copyright (C) 2008 Stout Public House. All Rights Reserved #}
+
+{% block title %}Stout Public House &#8212; reloading fixtures{% endblock %}
+
+{% block adminheader %}
+<h1>Stout Public House &#8212; reloading games</h1>
+{% endblock %}
+
+{% block content %}
+<h2>Games</h2>
+<ul>
+{% for game in games %}
+<li>
+  Start: {{game.dtstart}} <br />
+  Team 1: {{game.team1}} <br />
+  Team 2: {{game.team2}} <br />
+</li>
+{% endfor%}
+</ul>
+{% endblock %}

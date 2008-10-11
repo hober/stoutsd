@@ -1,6 +1,7 @@
 # Copyright (C) 2008 Stout Public House. All Rights Reserved
 
 import calendar
+import csv
 import datetime
 import os
 
@@ -16,6 +17,8 @@ from stoutsd.stout.models import MenuItem, MenuCategory, SoupOfTheDay, \
     Post, Event, Game
 from stoutsd.stout.admin.forms import MenuItemForm, MenuCategoryForm, \
     SoupOfTheDayForm, PostForm, EventForm, GameForm
+
+from stoutsd.utils import eastern_time
 
 ADMINS=['hober0@gmail.com']
 def adminonly(url):
@@ -39,6 +42,29 @@ def render_admin_template(tmpl, context):
 @adminonly('/admin/')
 def dashboard(request):
     return render_admin_template('admin/dashboard.html', dict())
+
+@adminonly('/admin/load-nhl/')
+def load_nhl(request):
+    """Populate the data store with an initial set of games."""
+    games = csv.reader(open(os.path.dirname(__file__) + '/../../nhl.csv', 'r'))
+    gs = []
+    for game in games:
+        year = int(game[0])
+        month = int(game[1])
+        day = int(game[2])
+        hour = int(game[3])
+        minute = int(game[4])
+        second = int(game[5])
+        # dst = int(game[6])
+        team1 = game[7]
+        team2 = game[8]
+        tzinfo = eastern_time
+        dtstart = datetime.datetime(year, month, day, hour, minute, second, 0, tzinfo)
+        g = Game(sport='NHL', team1=team1, team2=team2, dtstart=dtstart)
+        g.put()
+        gs.append(g)
+
+    return render_admin_template('admin/games.html', dict(games=gs))
 
 @adminonly('/admin/load-fixtures/')
 def load_fixtures(request):

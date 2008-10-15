@@ -22,3 +22,21 @@ ul.errorlist {
   margin: 0 0 3px;
   padding: 4px 5px;
 }
+
+#ui-datepicker-div {
+  background: #eee;
+  border: 1px solid black;
+}
+
+.ui-datepicker-close,
+.ui-datepicker-clear,
+.ui-datepicker-prev,
+.ui-datepicker-current,
+.ui-datepicker-next {
+  margin: 0 1ex 0 0;
+  display: inline;
+}
+
+.ui-datepicker {
+  background: #fe8;
+}

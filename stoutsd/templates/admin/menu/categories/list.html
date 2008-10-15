@@ -9,13 +9,14 @@
 
 {% block content %}
 
-<h2>Menu Categories</h2>
+<h2>Menu Categories  &#8212;<a href="/admin/menu/categories/new/">Add a new category</a></h2>
 
 <table>
   <thead>
     <tr>
       <th>Name</th>
       <th>Description</th>
+      <th>Action</th>
     </tr>
   </thead>
   <tbody>
@@ -23,6 +24,9 @@
     <tr>
       <td>{{ c.name }}</td>
       <td>{{ c.description }}</td>
+      <td>
+        <a href="/admin/menu/categories/edit/{{c.key}}/">Edit</a>
+      </td>
     </tr>
   </tbody>
   {%endfor %}

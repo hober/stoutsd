@@ -37,6 +37,10 @@ class Game(db.Model):
     @staticmethod
     def from_form(form):
         if not form.is_valid(): return None
+        d = form.clean_data['start_date']
+        t = form.clean_data['start_time']
+        dt = datetime.datetime(d.year, d.month, d.day, t.hour, t.minute, t.second, t.microsecond, pacific_time)
+        form.clean_data['dtstart'] = dt
         return Game(**form.clean_data)
 
     @staticmethod
@@ -94,8 +98,14 @@ class Event(EntryMixin, db.Model):
         content = form.clean_data['content']
         content_rendered = markdown.markdown(content)
         publish = form.clean_data['publish']
-        dtstart = form.clean_data['start']
-        dtend = form.clean_data['end']
+
+        d = form.clean_data['start_date']
+        t = form.clean_data['start_time']
+        dtstart = datetime.datetime(d.year, d.month, d.day, t.hour, t.minute, t.second, t.microsecond, pacific_time)
+        d = form.clean_data['end_date']
+        t = form.clean_data['end_time']
+        dtend = datetime.datetime(d.year, d.month, d.day, t.hour, t.minute, t.second, t.microsecond, pacific_time)
+
         all_day = form.clean_data['all_day']
         # Existing objects only
         key = form.clean_data['key']

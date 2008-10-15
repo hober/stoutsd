@@ -10,14 +10,18 @@ class RequiredFieldMixin:
         return {'class': 'required'}
 
 class RequiredCharField(RequiredFieldMixin, forms.CharField):
-    def __init__ (self, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         kwargs['required'] = True
         forms.CharField.__init__(self, *args, **kwargs)
 
 class RequiredChoiceField(RequiredFieldMixin, forms.ChoiceField):
-    def __init__ (self, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         kwargs['required'] = True
         forms.ChoiceField.__init__(self, *args, **kwargs)
+
+class DatePickerField(forms.DateField):
+    def widget_attrs(self, widget):
+        return {'class': 'pickme'}
 
 class GameForm(forms.Form):
     sport = RequiredChoiceField(choices=[
@@ -28,7 +32,8 @@ class GameForm(forms.Form):
             ("Soccer","Soccer")])
     team1 = RequiredCharField()
     team2 = RequiredCharField()
-    dtstart = forms.DateTimeField(required=True)
+    start_date = DatePickerField(required=True)
+    start_time = forms.TimeField(required=True)
 
 class PostForm(forms.Form):
     title = RequiredCharField()
@@ -41,8 +46,10 @@ class EventForm(forms.Form):
     content = RequiredCharField(widget=forms.Textarea)
     publish = forms.BooleanField(required=False)
     key = forms.CharField(required=False, widget=forms.HiddenInput)
-    start = forms.DateTimeField(required=True)
-    end = forms.DateTimeField(required=False)
+    start_date = DatePickerField(required=True)
+    start_time = forms.TimeField(required=True)
+    end_date = DatePickerField(required=False)
+    end_time = forms.TimeField(required=False)
     all_day = forms.BooleanField(required=False)
 
 class MenuItemForm(forms.Form):

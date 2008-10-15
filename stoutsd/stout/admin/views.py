@@ -20,7 +20,7 @@ from stoutsd.stout.admin.forms import MenuItemForm, MenuCategoryForm, \
 
 from stoutsd.utils import eastern_time
 
-ADMINS=['hober0@gmail.com']
+ADMINS=['hober0@gmail.com','mark@stoutsd.com','dave@stoutsd.com']
 def adminonly(url):
     def _dec(view_func):
         def _checklogin(request, *args, **kwargs):

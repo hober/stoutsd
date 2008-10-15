@@ -16,3 +16,25 @@
 </form>
 
 {% endblock %}
+
+
+{% block content %}
+
+{% if event %}
+<h2>Edit Event</h2>
+{% else %}
+<h2>New Event</h2>
+{% endif %}
+<form action="/admin/events/{% if event %}edit/{{event.key}}{% else %}new{% endif %}/" method="POST">
+  {{ event_form.as_p }}
+  <p><input type="submit" value="Submit" /></p>
+</form>
+{% if event %}
+<form action="/admin/events/delete/{{event.key}}/" method="POST">
+  <p>
+    <label for="delete">Delete this event? WARNING: THERE IS NO UNDO.</label>
+    <input type="submit" value="Delete" id="delete" />
+  </p>
+</form>
+{% endif %}
+{% endblock %}

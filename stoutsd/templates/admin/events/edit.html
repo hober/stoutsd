@@ -9,7 +9,11 @@
 
 {% block content %}
 
+{% if event %}
+<h2>Edit Event</h2>
+{% else %}
 <h2>New Event</h2>
+{% endif %}
 <form action="/admin/events/{% if event %}edit/{{event.key}}{% else %}new{% endif %}/" method="POST">
   {{ event_form.as_p }}
   <p><input type="submit" value="Submit" /></p>

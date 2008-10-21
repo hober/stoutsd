@@ -45,6 +45,14 @@ a, a:visited, a:active, a:hover {
   color: #c89349;
 }
 
+#top a, #top a:visited, #top a:active, #top a:hover {
+  color: #e4d4af;
+}
+
+#top h2 a, #top h2 a:visited, #top h2 a:active, #top h2 a:hover {
+  color: #fefefe;
+}
+
 .orange-line { color: #f77512; }
 .blue-line   { color: #3e9dfe; }
 
@@ -81,15 +89,15 @@ h1.span-16 {
   color: #f6ecd6;
 }
 
-#hours dl {
+#top dl {
   margin-bottom: 0;
 }
 
-#hours dt {
+#top dt {
   font-weight: normal;
 }
 
-#hours dd, #hours p, #location h2 .small {
+#top dd, #top p, #location h2 .small {
   text-transform: none;
   font-style: italic;
   color: #e4d4af;
@@ -97,7 +105,7 @@ h1.span-16 {
 
 }
 
-#hours dd {
+#top dd {
   margin: 0 0 0.75em 0;
 }
 
@@ -107,7 +115,7 @@ h1.span-16 {
   text-decoration: none;
 }
 
-#hours, #dujour, #footer {
+#top, #footer {
   text-align: center;
 }
 
@@ -130,14 +138,15 @@ ul.nobullets, ol.nobullets {
   font-variant: small-caps;
 }
 
-#menulink {
-  font-style: italic;
-  margin: -0.5em auto 0.5em;
-}
+/* #menulink, #listlink { */
+/*   font-style: italic; */
+/*   margin: -0.5em auto 0.5em; */
+/* } */
 
-#menulink .minor {
-  text-transform: none;
-}
+/* #menulink .minor, */
+/* #listlink .minor { */
+/*   text-transform: none; */
+/* } */
 
 #sports .vevent .dtstart {
   font-size: 14px;

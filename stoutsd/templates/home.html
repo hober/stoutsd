@@ -24,25 +24,16 @@
     <img id="slideshow" src="/images/stout-main.jpg" alt="Stout Public House" />
   </div>
   <div id="dujour" class="span-8 last">
-    {% if specials %}
-    <h2>Daily Specials</h2>
-    <ul class="nobullets noindent">
-      {% for special in specials %}
-      <li>{{ special.name }} &#8212; <i class="price">{{ special.price }}</i></li>
-      {% endfor %}
-    </ul>
-    {% endif %}
-    {% if soup %}
+    <h2><a href="/menu">View <span class="minor">the</span> Menu</a></h2>
     <hr />
-    <h2>Soup <span class="minor">of the</span> Day</h2>
-    <ul class="nobullets noindent">
-      <li>{{soup.name}} &#8212; {{soup.price}}</li>
-    </ul>
-    {% endif %}
-    <hr />
-    <div id="menulink">
-      <a href="/menu">View <span class="minor">the</span> Menu</a>
-    </div>
+    <dl>
+    <dt><a href="http://groups.google.com/group/stoutsd">Join our Mailing List</a></dt>
+    <dd>Event announcements, specials, and more!</dd>
+    <dt><a href="http://twitter.com/stoutsd">Follow us on Twitter</a></dt>
+    <dd>Text messages with daily specials, events</dd>
+    <dt><a href="http://flickr.com/groups/stoutsd/">Photos on Flickr</a></dt>
+    <dd>Share your own Stout moments</dd>
+    </dl>
     <hr />
   </div>
 </div>
@@ -66,7 +57,7 @@
       Stout Public House is available for private parties and holiday
       parties (10&#8211;100 people). Catering is available to all
       offices in downtown San Diego. <a
-      href="mailto:inquiries@stoutsd.com">Contact us</a> for more
+      href="mailto:dave@stoutsd.com">Contact us</a> for more
       information.
     </p>
   </div>
@@ -168,8 +159,6 @@
         <p>
           <a href="mailto:mark@stoutsd.com">mark@stoutsd.com</a>
           <a href="mailto:dave@stoutsd.com">dave@stoutsd.com</a>
-          <a href="mailto:info@stoutsd.com">info@stoutsd.com</a>
-          <a href="mailto:events@stoutsd.com">events@stoutsd.com</a>
         </p>
         <p>
           Or friend us on <a

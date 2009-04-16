@@ -8,31 +8,19 @@
 {% endblock %}
 
 {% block content %}
-
-<h2>New Menu Category</h2>
-<form action="/admin/menu/categories/" method="POST">
-  {{ new_category_form.as_p }}
-  <p><input type="submit" value="Submit" /></p>
-</form>
-
-{% endblock %}
-
-
-{% block content %}
-
-{% if event %}
-<h2>Edit Event</h2>
+{% if category %}
+<h2>Edit Menu Category</h2>
 {% else %}
-<h2>New Event</h2>
+<h2>New Menu Category</h2>
 {% endif %}
-<form action="/admin/events/{% if event %}edit/{{event.key}}{% else %}new{% endif %}/" method="POST">
-  {{ event_form.as_p }}
+<form action="/admin/menu/categories/{% if category %}edit/{{category.key}}{% else %}new{% endif %}/" method="POST">
+  {{ category_form.as_p }}
   <p><input type="submit" value="Submit" /></p>
 </form>
-{% if event %}
-<form action="/admin/events/delete/{{event.key}}/" method="POST">
+{% if category %}
+<form action="/admin/menu/categories/delete/{{category.key}}/" method="POST">
   <p>
-    <label for="delete">Delete this event? WARNING: THERE IS NO UNDO.</label>
+    <label for="delete">Delete this category? WARNING: THERE IS NO UNDO.</label>
     <input type="submit" value="Delete" id="delete" />
   </p>
 </form>

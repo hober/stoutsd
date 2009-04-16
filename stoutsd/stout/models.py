@@ -188,9 +188,17 @@ class MenuCategory(db.Model):
     @staticmethod
     def from_form(form):
         if not form.is_valid(): return None
-        return MenuCategory(key_name=form.clean_data['key'],
-                            name=form.clean_data['name'],
-                            description=form.clean_data['description'])
+        name = form.clean_data['name']
+        description = form.clean_data['description']
+        # Existing objects only
+        key = form.clean_data['key']
+        if key:
+            existing = MenuCategory.get(key)
+            existing.name = name
+            existing.description = description
+            return existing
+        else:
+            return MenuCategory(name=name, description=description)
 
 class MenuItem(db.Model):
     category = db.ReferenceProperty(MenuCategory)

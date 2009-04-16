@@ -116,15 +116,34 @@ def list_menu_categories(request):
 
 @adminonly('/admin/menu/categories/')
 def edit_menu_category(request, key=None):
+    category = None
+    if key is not None:
+        category = MenuCategory.get(key)
     if request.method == 'POST':
         form = MenuCategoryForm(request.POST)
         if form.is_valid():
             cat = MenuCategory.from_form(form)
             cat.put()
+            return HttpResponseRedirect('/admin/menu/categories/')
+    elif category:
+        form = MenuCategoryForm({
+                'name': category.name,
+                'description': category.description,
+                # Hidden
+                'key': category.key()})
     else:
         form=MenuCategoryForm()
     return render_admin_template('admin/menu/categories/edit.html', dict(
-            new_category_form=form))
+            category=category, category_form=form))
+
+@adminonly('/admin/menu/categories/delete/')
+def delete_menu_category(request, key=None):
+    category = None
+    if key is not None:
+        category = MenuCategory.get(key)
+    if key and request.method == 'POST':
+        category.delete()
+    return HttpResponseRedirect('/admin/menu/categories/')
 
 @adminonly('/admin/menu/items/')
 def list_menu_items(request):

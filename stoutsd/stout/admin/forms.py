@@ -68,7 +68,7 @@ class MenuItemForm(forms.Form):
         return name
 
 class MenuCategoryForm(forms.Form):
-    key = RequiredCharField()
+    key = forms.CharField(required=False, widget=forms.HiddenInput)
     name = RequiredCharField()
     description = forms.CharField(required=False)
 

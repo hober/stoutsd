@@ -1,5 +1,7 @@
 # Copyright (C) 2008 Stout Public House. All Rights Reserved
 
+import logging
+
 from django import newforms as forms
 from google.appengine.ext import db
 from stoutsd.stout.models import MenuCategory, MenuItem
@@ -58,14 +60,7 @@ class MenuItemForm(forms.Form):
     name = RequiredCharField()
     price = RequiredCharField()
     description = forms.CharField(required=False)
-    display_on_menu = forms.BooleanField()
-
-    def clean_name(self):
-        name = self.clean_data.get('name', '')
-        items = db.GqlQuery("SELECT * FROM MenuItem WHERE name = :1", name)
-        if items.count() > 0:
-            raise forms.ValidationError("Menu item already exists!")
-        return name
+    show_on_menu = forms.BooleanField()
 
 class MenuCategoryForm(forms.Form):
     key = forms.CharField(required=False, widget=forms.HiddenInput)

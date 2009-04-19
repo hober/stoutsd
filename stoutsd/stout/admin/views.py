@@ -3,6 +3,7 @@
 import calendar
 import csv
 import datetime
+import logging
 import os
 
 import yaml
@@ -153,31 +154,38 @@ def list_menu_items(request):
 
 @adminonly('/admin/menu/items/')
 def edit_menu_item(request, key=None):
+    item = None
+    if key is not None:
+        item = MenuItem.get(key)
     if request.method == 'POST':
         form = MenuItemForm(request.POST)
         if form.is_valid():
-            item = MenuItem.from_form(form)
+            item = MenuItem.from_form(form, key)
             item.put()
+            return HttpResponseRedirect('/admin/menu/items/')
+    elif item:
+        form = MenuItemForm({
+    		'category': item.category.key(),
+                'name': item.name,
+                'description': item.description,
+                'price': item.price,
+                'show_on_menu': item.show_on_menu,
+                # Hidden
+                'key': item.key()})
     else:
         form=MenuItemForm()
-
     return render_admin_template('admin/menu/items/edit.html', dict(
-            new_item_form=form))
+            item=item, item_form=form))
 
-@adminonly('/admin/menu/soups/')
-def soup_of_the_day(request):
-    if request.method == 'POST':
-        form = SoupOfTheDayForm(request.POST)
-        if form.is_valid():
-            for day in xrange(len(calendar.day_name)):
-                name = calendar.day_name[day]
-                soup = MenuItem.get(form.clean_data[name.lower()])
-                SoupOfTheDay.set_day(day, soup)
-    else:
-        form=SoupOfTheDayForm()
+@adminonly('/admin/menu/items/delete/')
+def delete_menu_item(request, key=None):
+    item = None
+    if key is not None:
+        item = MenuItem.get(key)
+    if key and request.method == 'POST':
+        item.delete()
+    return HttpResponseRedirect('/admin/menu/items/')
 
-    return render_admin_template('admin/menu/soups.html', dict(
-            soup_of_the_day_form=form))
 
 # Posts
 

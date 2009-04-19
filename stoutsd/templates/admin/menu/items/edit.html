@@ -8,11 +8,21 @@
 {% endblock %}
 
 {% block content %}
-
-<h2>New Menu item</h2>
-<form action="/admin/menu/items/" method="POST">
-  {{ new_item_form.as_p }}
+{% if item %}
+<h2>Edit Menu Item</h2>
+{% else %}
+<h2>New Menu Item</h2>
+{% endif %}
+<form action="/admin/menu/items/{% if item %}edit/{{item.key}}{% else %}new{% endif %}/" method="POST">
+  {{ item_form.as_p }}
   <p><input type="submit" value="Submit" /></p>
 </form>
-
+{% if item %}
+<form action="/admin/menu/items/delete/{{item.key}}/" method="POST">
+  <p>
+    <label for="delete">Delete this item? WARNING: THERE IS NO UNDO.</label>
+    <input type="submit" value="Delete" id="delete" />
+  </p>
+</form>
+{% endif %}
 {% endblock %}

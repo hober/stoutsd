@@ -208,15 +208,25 @@ class MenuItem(db.Model):
     show_on_menu = db.BooleanProperty(default=True)
 
     @staticmethod
-    def from_form(form):
+    def from_form(form, key=None):
         if not form.is_valid(): return None
-        cat_key = form.clean_data['category']
-        cat = MenuCategory.get(cat_key)
-        return MenuItem(category=cat,
-                        name=form.clean_data['name'],
-                        price=form.clean_data['price'],
-                        description=form.clean_data['description'],
-                        show_on_menu=form.clean_data['display_on_menu'])
+        name = form.clean_data['name']
+        price = form.clean_data['price']
+        description = form.clean_data['description']
+        show_on_menu = form.clean_data['show_on_menu']
+        # Existing objects only
+        if key is None:
+            key = form.clean_data['key']
+        if key:
+            existing = MenuItem.get(key)
+            existing.name = name
+            existing.price = price
+            existing.description = description
+            existing.show_on_menu = show_on_menu
+            return existing
+        else:
+            return MenuItem(name=name, price=price, description=description,
+                            show_on_menu=show_on_menu)
 
     @staticmethod
     def soup_choices():

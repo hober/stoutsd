@@ -9,7 +9,7 @@
 
 {% block content %}
 
-<h2>Menu Items</h2>
+<h2>Menu Items  &#8212;<a href="/admin/menu/items/new/">Add a new item</a></h2>
 
 <table>
   <thead>
@@ -18,7 +18,8 @@
       <th>Price</th>
       <th>Category</th>
       <th>Description</th>
-      <th>Display on menu?</th>
+      <th>Show on menu?</th>
+      <th>Action</th>
     </tr>
   </thead>
   <tbody>
@@ -29,6 +30,9 @@
       <td>{{ i.category.name }}</td>
       <td>{{ i.description }}</td>
       <td>{{ i.show_on_menu }}</td>
+      <td>
+        <a href="/admin/menu/items/edit/{{i.key}}/">Edit</a>
+      </td>
     </tr>
   </tbody>
   {%endfor %}

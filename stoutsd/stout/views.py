@@ -8,12 +8,11 @@ from stoutsd.stout.models import MenuCategory, SoupOfTheDay, Post, \
     Event, Game, AtomEntry, AtomFeed
 
 def home(request):
-    sotd = SoupOfTheDay.today()
-    posts = Post.recent(5)
+    # sotd = SoupOfTheDay.today()
+    # posts = Post.recent(5)
     events = Event.upcoming(5)
-    games = Game.today()
-    return render_to_response('home.html', dict(
-            posts=posts, events=events, soup=sotd, games=games))
+    # games = Game.today()
+    return render_to_response('home.html', dict(events=events))
 
 def feed(request):
     sotd = SoupOfTheDay.today()

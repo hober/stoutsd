@@ -87,59 +87,24 @@
   </div>
 </div>
 <div id="bottom" class="span-24">
-  <div id="blog" class="span-7 append-1">
-    {% if posts %}
-    <h2>Recent Posts</h2>
+  <div id="events" class="span-7 append-1">
+    {% if events %}
+    <h2>Upcoming Events</h2>
     <hr />
-    <ol class="hfeed nobullets noindent">
-      {% for post in posts %}
-      <li class="hentry">
-        <h3 class="entry-title"><a href="{{ post.url }}">{{ post.title }}</a></h3>
-        <p class="entry-meta"><abbr title="{{ post.published }}" class="published">{{ post.published_date }}</abbr></p>
-        <div class="entry-content">
-          {{ post.content_rendered }}
+    <ol class="vcalendar nobullets noindent">
+      {% for event in events %}
+      <li class="vevent">
+        <div class="event-meta"><abbr title="{{ event.dtstart }}" class="dtstart">{{ event.dtstart_human }}</abbr></div>
+        <h3 class="summary">{{ event.title }}</h3>
+        <div class="note">
+          {{ event.content_rendered }}
         </div>
       </li>
       {% endfor %}
     </ol>
-    <p><a href="/posts/">View Archives</a></p>
     {% endif %}
   </div>
   <div id="bottom-right" class="span-16 last">
-    <div id="bottom-right-top" class="span-16 last">
-      <div id="events" class="span-7 append-1">
-        {% if events %}
-        <h2>Upcoming Events</h2>
-        <hr />
-        <ol class="vcalendar nobullets noindent">
-          {% for event in events %}
-          <li class="vevent">
-            <div class="event-meta"><abbr title="{{ event.dtstart }}" class="dtstart">{{ event.dtstart_human }}</abbr></div>
-            <h3 class="summary">{{ event.title }}</h3>
-            <div class="note">
-              {{ event.content_rendered }}
-            </div>
-          </li>
-          {% endfor %}
-        </ol>
-        <p><a href="/calendar/">View all events</a></p>
-        {% endif %}
-      </div>
-      <div id="sports" class="span-8 last">
-        {% if games %}
-        <h2>Sports Schedule</h2>
-        <hr />
-        <ol class="vcalendar nobullets noindent">
-          {% for game in games %}
-          <li class="vevent">
-            <div class="dtstart">{{ game.date_human }}</div>
-            <div class="summary">{{ game.team1 }} vs. {{ game.team2 }} &#8212; {{game.time_human}}</div>
-          </li>
-          {% endfor %}
-        </ol>
-        {% endif %}
-      </div>
-    </div>
     <div id="bottom-right-bottom" class="span-16 last">
       <div id="photos" class="span-12">
         <h2>Recent Photos</h2>

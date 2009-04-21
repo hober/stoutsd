@@ -48,6 +48,8 @@ def menu(request):
     col2 = [MenuCategory.get_by_key_name("sandwiches"),
             MenuCategory.get_by_key_name("pub-grub")]
     col3 = [MenuCategory.get_by_key_name("main-course"),
+            # Anytime Breakfast
+            MenuCategory.get_by_key_name("aghzdG91dHNkMnITCxIMTWVudUNhdGVnb3J5GJEcDA"),
             MenuCategory.get_by_key_name("sides"),
             MenuCategory.get_by_key_name("desserts")]
     return render_to_response('menu.html', dict(

@@ -185,6 +185,10 @@ margin: 0 0 1em 0;
   margin-left: 1em;
 }
 
+#menu .signed {
+  text-align: right;
+}
+
 #menu ul li .description {
   display: block;
 }

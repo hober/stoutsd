@@ -214,6 +214,8 @@ class MenuItem(db.Model):
         price = form.clean_data['price']
         description = form.clean_data['description']
         show_on_menu = form.clean_data['show_on_menu']
+        category_key = form.clean_data['category']
+        category = MenuCategory.get(key)
         # Existing objects only
         if key is None and 'key' in form.clean_data:
             key = form.clean_data['key']
@@ -223,10 +225,11 @@ class MenuItem(db.Model):
             existing.price = price
             existing.description = description
             existing.show_on_menu = show_on_menu
+            existing.category = category
             return existing
         else:
             return MenuItem(name=name, price=price, description=description,
-                            show_on_menu=show_on_menu)
+                            show_on_menu=show_on_menu, category=category)
 
     @staticmethod
     def soup_choices():

@@ -215,7 +215,7 @@ class MenuItem(db.Model):
         description = form.clean_data['description']
         show_on_menu = form.clean_data['show_on_menu']
         category_key = form.clean_data['category']
-        category = MenuCategory.get(key)
+        category = MenuCategory.get(category_key)
         # Existing objects only
         if key is None and 'key' in form.clean_data:
             key = form.clean_data['key']

@@ -164,8 +164,12 @@ def edit_menu_item(request, key=None):
             item.put()
             return HttpResponseRedirect('/admin/menu/items/')
     elif item:
+        if item.category is None:
+            category_key = ""
+        else:
+            category_key = item.category.key()
         form = MenuItemForm({
-    		'category': item.category.key(),
+    		'category': category_key,
                 'name': item.name,
                 'description': item.description,
                 'price': item.price,

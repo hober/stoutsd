@@ -215,7 +215,7 @@ class MenuItem(db.Model):
         description = form.clean_data['description']
         show_on_menu = form.clean_data['show_on_menu']
         # Existing objects only
-        if key is None:
+        if key is None and 'key' in form.clean_data:
             key = form.clean_data['key']
         if key:
             existing = MenuItem.get(key)

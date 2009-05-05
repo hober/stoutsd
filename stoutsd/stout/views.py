@@ -41,15 +41,8 @@ def post(request, slug=None):
             post=post))
 
 def menu(request):
-    col1 = [MenuCategory.get_by_key_name("starters"),
-            MenuCategory.get_by_key_name("soups"),
-            MenuCategory.get_by_key_name("salads")]
-    col2 = [MenuCategory.get_by_key_name("sandwiches"),
-            # Anytime Breakfast
-            MenuCategory.get("aghzdG91dHNkMnITCxIMTWVudUNhdGVnb3J5GJEcDA")]
-    col3 = [MenuCategory.get_by_key_name("main-course"),
-            MenuCategory.get_by_key_name("pub-grub"),
-            MenuCategory.get_by_key_name("sides"),
-            MenuCategory.get_by_key_name("desserts")]
+    col1 = MenuCategory.get_by_column(1)
+    col2 = MenuCategory.get_by_column(2)
+    col3 = MenuCategory.get_by_column(3)
     return render_to_response('menu.html', dict(
             column_1=col1, column_2=col2, column_3=col3))

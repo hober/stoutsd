@@ -66,6 +66,9 @@ class MenuCategoryForm(forms.Form):
     key = forms.CharField(required=False, widget=forms.HiddenInput)
     name = RequiredCharField()
     description = forms.CharField(required=False)
+    column = forms.ChoiceField(
+        required=True, choices=[('1','1'),('2','2'),('3','3')])
+    order = forms.IntegerField(required=True)
 
 class SoupOfTheDayForm(forms.Form):
     MenuItem.all()

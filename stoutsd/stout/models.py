@@ -181,6 +181,12 @@ class Post(EntryMixin, db.Model):
 class MenuCategory(db.Model):
     name = db.StringProperty(multiline=False)
     description = db.StringProperty(multiline=False)
+    column = db.IntegerProperty(required=True)
+    order = db.IntegerProperty(required=True)
+
+    @staticmethod
+    def get_by_column(column):
+        return MenuCategory.gql("WHERE column = :1 ORDER BY order", column)
 
     def items(self):
         return MenuItem.gql("WHERE show_on_menu = :1 AND category = :2", True, self)
@@ -190,15 +196,20 @@ class MenuCategory(db.Model):
         if not form.is_valid(): return None
         name = form.clean_data['name']
         description = form.clean_data['description']
+        column = int(form.clean_data['column'])
+        order = form.clean_data['order']
         # Existing objects only
         key = form.clean_data['key']
         if key:
             existing = MenuCategory.get(key)
             existing.name = name
             existing.description = description
+            existing.column = column
+            existing.order = order
             return existing
         else:
-            return MenuCategory(name=name, description=description)
+            return MenuCategory(name=name, description=description,
+                                column=column, order=order)
 
 class MenuItem(db.Model):
     category = db.ReferenceProperty(MenuCategory)

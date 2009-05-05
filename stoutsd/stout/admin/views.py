@@ -84,8 +84,11 @@ def load_fixtures(request):
         key = category['key']
         name = category.get('name', '')
         description = category.get('description', '')
+        column = category.get('column', 1)
+        order = category.get('order', 1)
         cat = MenuCategory(key_name=key, name=name,
-                           description=description)
+                           description=description,
+                           column=column, order=order)
         cat.put()
         categories_by_key[key] = cat
 
@@ -111,7 +114,7 @@ def menu(request):
 
 @adminonly('/admin/menu/categories/')
 def list_menu_categories(request):
-    categories = db.GqlQuery("SELECT * FROM MenuCategory")
+    categories = db.GqlQuery("SELECT * FROM MenuCategory ORDER BY name")
     return render_admin_template('admin/menu/categories/list.html', dict(
             categories=categories))
 
@@ -130,6 +133,8 @@ def edit_menu_category(request, key=None):
         form = MenuCategoryForm({
                 'name': category.name,
                 'description': category.description,
+                'column': str(category.column),
+                'order': category.order,
                 # Hidden
                 'key': category.key()})
     else:
@@ -148,7 +153,7 @@ def delete_menu_category(request, key=None):
 
 @adminonly('/admin/menu/items/')
 def list_menu_items(request):
-    items = db.GqlQuery("SELECT * FROM MenuItem")
+    items = db.GqlQuery("SELECT * FROM MenuItem ORDER BY name")
     return render_admin_template('admin/menu/items/list.html', dict(
             items=items))
 

@@ -3,30 +3,46 @@
 MenuCategory:
 - name: Starters
   key: starters
+  column: 1
+  order: 1
 
 - name: Stout Soups
   key: soups
   description: House made fresh daily. Ask server for daily choice
+  column: 1
+  order: 2
 
 - name: Stout Salads
   key: salads
+  column: 1
+  order: 3
 
 - name: Burgers and Sandwiches
   description: Add sautéed mushrooms, cheese, sliced avocado, bacon for $.75 each. Served with French fries.
   key: sandwiches
+  column: 2
+  order: 1
 
 - name: Irish Pub Fare
   key: pub-grub
+  column: 2
+  order: 2
 
 - name: Main Events
   key: main-course
+  column: 3
+  order: 1
 
 - name: Sides and Such
   key: sides
+  column: 3
+  order: 2
 
 - name: Desserts
   key: desserts
   description: House made. Ask server for daily choice
+  column: 3
+  order: 3
 
 MenuItem:
 - category: starters

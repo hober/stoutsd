@@ -181,8 +181,8 @@ class Post(EntryMixin, db.Model):
 class MenuCategory(db.Model):
     name = db.StringProperty(multiline=False)
     description = db.StringProperty(multiline=False)
-    column = db.IntegerProperty(required=True)
-    order = db.IntegerProperty(required=True)
+    column = db.IntegerProperty(required=True, default=1)
+    order = db.IntegerProperty(required=True, default=1)
 
     @staticmethod
     def get_by_column(column):

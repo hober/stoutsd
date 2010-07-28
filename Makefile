@@ -1,3 +1,7 @@
+GAE_SDK_ROOT=~/i386-linux/google_appengine
+
+dummy:
+
 deps: js/jquery.metadata.min.js js/jquery.validate.min.js
 
 clean:
@@ -26,5 +30,8 @@ TAGS: js/admin.js js/stout.js main.py stoutsd/__init__.py \
 	find . -name \*.py -or -name \*.js | etags -
 
 deploy:
-	@/usr/bin/python /usr/local/bin/appcfg.py --no_cookies \
+	@/usr/bin/python $(GAE_SDK_ROOT)/appcfg.py --no_cookies \
 		--email=hober0@gmail.com --passin update .
+
+test:
+	@/usr/bin/python $(GAE_SDK_ROOT)/dev_appserver.py .

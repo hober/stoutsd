@@ -1,4 +1,5 @@
-GAE_SDK_ROOT=~/i386-linux/google_appengine
+# GAE_SDK_ROOT=~/i386-linux/google_appengine
+GAE_SDK_ROOT=/usr/local/bin
 
 dummy:
 

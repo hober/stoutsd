@@ -1,5 +1,5 @@
-# Copyright (C) 2008 Stout Public House. All Rights Reserved
-application: stoutsd2
+# Copyright (C) 2008, 2015 Stout Public House. All Rights Reserved
+application: stoutsd3
 version: 1
 runtime: python
 api_version: 1

@@ -15,19 +15,16 @@ import logging
 import django.core.handlers.wsgi
 import django.core.signals
 import django.db
-import django.dispatch.dispatcher
+from django.core.signals import request_started, request_finished
 
 def log_exception (*args, **kwargs):
     logging.exception('Exception in request:')
 
 # Log errors.
-django.dispatch.dispatcher.connect(
-    log_exception, django.core.signals.got_request_exception)
+request_started.connect(log_exception)
 
 # Unregister the rollback event handler.
-django.dispatch.dispatcher.disconnect(
-    django.db._rollback_on_exception,
-    django.core.signals.got_request_exception)
+request_finished.disconnect(django.db._rollback_on_exception)
 
 def main():
     util.run_wsgi_app(django.core.handlers.wsgi.WSGIHandler())

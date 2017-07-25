@@ -32,7 +32,7 @@ TAGS: js/admin.js js/stout.js main.py stoutsd/__init__.py \
 
 deploy:
 	@/usr/bin/python $(GAE_SDK_ROOT)/appcfg.py --no_cookies \
-		--email=hober0@gmail.com --passin update .
+		--email=hober0@gmail.com update .
 
 test:
 	@/usr/bin/python $(GAE_SDK_ROOT)/dev_appserver.py .

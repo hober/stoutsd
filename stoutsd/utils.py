@@ -2,6 +2,11 @@
 
 import datetime
 
+import django.template.defaultfilters
+
+def slugify(text):
+    return django.template.defaultfilters.slugify(text.encode('ascii','replace'))
+
 class USTime(datetime.tzinfo):
     def __init__(self, dude, letter):
         self.dude = dude

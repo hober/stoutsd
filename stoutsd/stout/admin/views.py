@@ -19,7 +19,7 @@ from stoutsd.stout.models import MenuItem, MenuCategory, SoupOfTheDay, \
 from stoutsd.stout.admin.forms import MenuItemForm, MenuCategoryForm, \
     SoupOfTheDayForm, PostForm, EventForm, GameForm
 
-from stoutsd.utils import eastern_time
+from stoutsd.utils import eastern_time, slugify
 
 ADMINS=['hober0@gmail.com',
         'mark@stoutsd.com',

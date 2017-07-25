@@ -4,11 +4,9 @@ import calendar
 import datetime
 import markdown
 
-from django.template.defaultfilters import slugify
-
 from google.appengine.ext import db
 
-from stoutsd.utils import pacific_time
+from stoutsd.utils import pacific_time, slugify
 
 HUMAN_DT_FORMAT = "%B %d @ %H:%M"
 HUMAN_DATE_FORMAT = "%B %d, %Y"
@@ -37,11 +35,11 @@ class Game(db.Model):
     @staticmethod
     def from_form(form):
         if not form.is_valid(): return None
-        d = form.clean_data['start_date']
-        t = form.clean_data['start_time']
+        d = form.cleaned_data['start_date']
+        t = form.cleaned_data['start_time']
         dt = datetime.datetime(d.year, d.month, d.day, t.hour, t.minute, t.second, t.microsecond, pacific_time)
-        form.clean_data['dtstart'] = dt
-        return Game(**form.clean_data)
+        form.cleaned_data['dtstart'] = dt
+        return Game(**form.cleaned_data)
 
     @staticmethod
     def today():
@@ -94,21 +92,21 @@ class Event(EntryMixin, db.Model):
     @staticmethod
     def from_form(form):
         if not form.is_valid(): return None
-        title = form.clean_data['title']
-        content = form.clean_data['content']
+        title = form.cleaned_data['title']
+        content = form.cleaned_data['content']
         content_rendered = markdown.markdown(content)
-        publish = form.clean_data['publish']
+        publish = form.cleaned_data['publish']
 
-        d = form.clean_data['start_date']
-        t = form.clean_data['start_time']
+        d = form.cleaned_data['start_date']
+        t = form.cleaned_data['start_time']
         dtstart = datetime.datetime(d.year, d.month, d.day, t.hour, t.minute, t.second, t.microsecond, pacific_time)
-        d = form.clean_data['end_date']
-        t = form.clean_data['end_time']
+        d = form.cleaned_data['end_date']
+        t = form.cleaned_data['end_time']
         dtend = datetime.datetime(d.year, d.month, d.day, t.hour, t.minute, t.second, t.microsecond, pacific_time)
 
-        all_day = form.clean_data['all_day']
+        all_day = form.cleaned_data['all_day']
         # Existing objects only
-        key = form.clean_data['key']
+        key = form.cleaned_data['key']
         # Create/modify the post
         updated = datetime.datetime.now()
         if key:
@@ -153,12 +151,12 @@ class Post(EntryMixin, db.Model):
     @staticmethod
     def from_form(form):
         if not form.is_valid(): return None
-        title = form.clean_data['title']
-        content = form.clean_data['content']
+        title = form.cleaned_data['title']
+        content = form.cleaned_data['content']
         content_rendered = markdown.markdown(content)
-        publish = form.clean_data['publish']
+        publish = form.cleaned_data['publish']
         # Existing objects only
-        key = form.clean_data['key']
+        key = form.cleaned_data['key']
         # Create/modify the post
         updated = datetime.datetime.now()
         if key:
@@ -194,12 +192,12 @@ class MenuCategory(db.Model):
     @staticmethod
     def from_form(form):
         if not form.is_valid(): return None
-        name = form.clean_data['name']
-        description = form.clean_data['description']
-        column = int(form.clean_data['column'])
-        order = form.clean_data['order']
+        name = form.cleaned_data['name']
+        description = form.cleaned_data['description']
+        column = int(form.cleaned_data['column'])
+        order = form.cleaned_data['order']
         # Existing objects only
-        key = form.clean_data['key']
+        key = form.cleaned_data['key']
         if key:
             existing = MenuCategory.get(key)
             existing.name = name
@@ -221,15 +219,15 @@ class MenuItem(db.Model):
     @staticmethod
     def from_form(form, key=None):
         if not form.is_valid(): return None
-        name = form.clean_data['name']
-        price = form.clean_data['price']
-        description = form.clean_data['description']
-        show_on_menu = form.clean_data['show_on_menu']
-        category_key = form.clean_data['category']
+        name = form.cleaned_data['name']
+        price = form.cleaned_data['price']
+        description = form.cleaned_data['description']
+        show_on_menu = form.cleaned_data['show_on_menu']
+        category_key = form.cleaned_data['category']
         category = MenuCategory.get(category_key)
         # Existing objects only
-        if key is None and 'key' in form.clean_data:
-            key = form.clean_data['key']
+        if key is None and 'key' in form.cleaned_data:
+            key = form.cleaned_data['key']
         if key:
             existing = MenuItem.get(key)
             existing.name = name
